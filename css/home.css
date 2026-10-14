@@ -1048,6 +1048,26 @@ body.home-page .mmiv-header {
     overflow-y: auto;
   }
 
+  body.home-page:not(.file-manager-page):not(.activity-page):not(.admin-page) {
+    height: auto;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .home-page:not(.file-manager-page):not(.activity-page):not(.admin-page) .home-shell {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  .home-page:not(.file-manager-page):not(.activity-page):not(.admin-page) .home-main {
+    flex: 1 0 auto;
+    min-height: auto;
+    justify-content: flex-start;
+    overflow: visible;
+  }
+
   body.home-page.file-manager-page,
   body.home-page.activity-page,
   body.home-page.admin-page {
