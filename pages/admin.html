@@ -1,205 +1,655 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f3f7fc">
-    <meta name="description" content="Manage MMIV folders, users, permissions, and administrator links">
-    <title>Administration · MMIV</title>
-    <link rel="stylesheet" href="../css/home.css">
-  </head>
-  <body class="home-page">
-    <div id="particles-js" aria-hidden="true"></div>
-    <div class="fx fx-glow" aria-hidden="true"></div>
-    <div class="fx fx-beam beam-one" aria-hidden="true"></div>
-    <div class="fx fx-beam beam-two" aria-hidden="true"></div>
-    <div class="fx fx-beam beam-three" aria-hidden="true"></div>
-    <div class="fx fx-bokeh bokeh-one" aria-hidden="true"></div>
-    <div class="fx fx-bokeh bokeh-two" aria-hidden="true"></div>
-    <div class="fx fx-bokeh bokeh-three" aria-hidden="true"></div>
 
-    <div class="home-shell">
-      <header class="home-header glass-panel">
-        <a class="home-brand" href="home.html" aria-label="MMIV dashboard">
-          <span class="brand-mark" aria-hidden="true">M</span><span>MMIV<span class="brand-dot">.</span></span>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#eaf3fc">
+  <meta name="description" content="MMIV Administration Workspace">
+  <title>Administration · MMIV</title>
+
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body class="home-page admin-page">
+
+  <!-- Background -->
+  <div id="particles-js" aria-hidden="true"></div>
+  <div class="fx fx-glow" aria-hidden="true"></div>
+  <div class="fx fx-beam beam-one" aria-hidden="true"></div>
+  <div class="fx fx-beam beam-two" aria-hidden="true"></div>
+  <div class="fx fx-beam beam-three" aria-hidden="true"></div>
+  <div class="fx fx-bokeh bokeh-one" aria-hidden="true"></div>
+  <div class="fx fx-bokeh bokeh-two" aria-hidden="true"></div>
+  <div class="fx fx-bokeh bokeh-three" aria-hidden="true"></div>
+
+  <div class="home-shell">
+
+    <!-- Shared header -->
+    <header class="home-header glass-panel">
+      <nav class="home-nav" aria-label="Main navigation">
+        <a href="home.html">Home</a>
+        <a href="file-manager.html">File Manager</a>
+        <a href="activity.html">Activity</a>
+        <a href="admin.html" class="active" aria-current="page" data-admin>
+          Administration
         </a>
-        <nav class="home-nav" aria-label="Main navigation">
-          <a href="home.html">Dashboard</a>
-          <a href="file-manager.html">File Manager</a>
-          <a href="activity.html">Activity</a>
-          <a class="active" aria-current="page" href="admin.html" data-admin>Administration <span class="admin-only-label">Admin only</span></a>
-        </nav>
+      </nav>
+
+      <div class="header-right">
         <div class="home-account">
           <div class="account-avatar" aria-hidden="true">MM</div>
-          <div class="account-copy"><strong id="account">MMIV account</strong><span>Workspace profile</span></div>
-          <button id="logout" class="sign-out-btn" type="button">Sign out</button>
+          <div class="account-copy">
+            <strong id="account">MMIV account</strong>
+            <span>Administrator</span>
+          </div>
+          <button id="logout" class="sign-out-btn" type="button">
+            Sign out
+          </button>
         </div>
-      </header>
 
-      <main class="home-main">
-        <p id="message" class="system-status" role="status" aria-live="polite"></p>
-        <header class="page-intro">
-          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Administrator workspace</p>
-          <h1>Administration</h1>
-          <p class="welcome-description">Manage destination folders, account permissions, and time-limited administrator and password-reset links.</p>
-        </header>
+        <a href="home.html" class="mmiv-header" aria-label="MMIV Home">
+          MMIV<span>.</span>
+        </a>
+      </div>
+    </header>
 
-        <nav class="section-jump glass-panel" aria-label="Administration sections">
-          <a href="#folder-management">Folder Management</a>
-          <a href="#users-permissions">Users &amp; Permissions</a>
-          <a href="#administrator-invitations">Administrator Invitations</a>
-          <a href="#password-reset-management">Password Reset Management</a>
-        </nav>
+    <!-- Main workspace -->
+    <main class="home-main admin-main">
+      <p id="status" class="system-status" role="status" aria-live="polite"></p>
 
-        <div id="management" class="admin-workspace">
-          <section id="folder-management" class="workspace-section glass-panel" aria-labelledby="folder-management-title">
-            <div class="section-heading">
-              <div><p class="section-eyebrow">Storage organization</p><h2 id="folder-management-title">Folder Management</h2></div>
+      <section class="admin-workspace glass-panel" aria-labelledby="admin-title">
+
+        <div class="admin-heading">
+          <h1 id="admin-title">Administration</h1>
+          <span class="admin-environment">Admin workspace</span>
+        </div>
+
+        <!-- CSS-only tabs -->
+        <input class="admin-tab-input" type="radio" name="admin-tabs" id="tab-folders" checked>
+        <input class="admin-tab-input" type="radio" name="admin-tabs" id="tab-users">
+        <input class="admin-tab-input" type="radio" name="admin-tabs" id="tab-invitations">
+        <input class="admin-tab-input" type="radio" name="admin-tabs" id="tab-logs">
+
+        <div class="admin-tabs" aria-label="Administration sections">
+          <label for="tab-folders" class="admin-tab">Folders</label>
+          <label for="tab-users" class="admin-tab">
+            Users &amp; Permissions
+          </label>
+          <label for="tab-invitations" class="admin-tab">
+            Invitations
+          </label>
+          <label for="tab-logs" class="admin-tab">
+            System Logs
+          </label>
+        </div>
+
+        <div class="admin-content">
+
+          <!-- ===============================
+               FOLDERS
+               =============================== -->
+          <section id="admin-folders" class="admin-section" aria-labelledby="folders-title">
+
+            <div class="admin-section-heading">
+              <h2 id="folders-title">Folders</h2>
+              <button id="openCreateFolder" class="admin-primary-button" type="button"
+                onclick="document.getElementById('createFolderDialog').showModal()">
+                Create folder
+              </button>
             </div>
-            <form id="createFolder" class="form-grid">
-              <div class="form-field">
-                <label for="folderName">New folder name</label>
-                <input id="folderName" name="folderName" maxlength="80" pattern="[A-Za-z0-9][A-Za-z0-9 _.\-]{0,79}" placeholder="SW001 or semester2" required>
-                <small>Folder names may contain letters, numbers, spaces, underscores, periods, and hyphens. Existing files are preserved.</small>
-              </div>
-              <div class="form-field form-field-action">
-                <span class="field-label" aria-hidden="true">Create</span>
-                <button class="primary-button" type="submit">Create folder</button>
-              </div>
-            </form>
-            <div class="management-grid">
-              <form id="folderSearch" class="form-field">
-                <label for="folderQuery">Search and select folders</label>
-                <div class="inline-form-control">
-                  <input id="folderQuery" name="folderQuery" type="search" placeholder="Search folder name">
-                  <button class="secondary-button" type="submit">Search folders</button>
-                </div>
-                <label for="folders">Select folder</label>
-                <select id="folders" name="folder">
-                  <option value="">Select a folder</option>
-                </select>
-              </form>
-              <div class="folder-information">
-                <h3>Folder information</h3>
-                <p id="folderInfo">Select a folder to view its available information.</p>
-                <h3>Folder actions</h3>
-                <button type="button" id="deleteFolder" class="danger-button">Delete selected folder</button>
-                <p class="field-note">Deleting a folder is a destructive action. Changes apply to subsequent requests, including existing login sessions.</p>
-              </div>
+
+            <div class="admin-folder-toolbar">
+              <input id="folderSearch" type="search" placeholder="Search folders..." aria-label="Search folders">
+              <span class="admin-folder-count">4 folders · Demo</span>
+            </div>
+
+            <div class="admin-folder-table-scroll">
+              <table class="admin-table admin-folder-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Folder name</th>
+                    <th scope="col">Path</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody id="foldersTable">
+                  <tr>
+                    <td>
+                      <span class="admin-folder-name">
+                        <span class="admin-folder-icon" aria-hidden="true">▣</span>
+                        Project Atlas
+                      </span>
+                    </td>
+                    <td class="admin-folder-path">
+                      <code>/Project Atlas/</code>
+                    </td>
+                    <td><span class="admin-badge badge-active">Active</span></td>
+                    <td>
+                      <button type="button" class="admin-row-delete" disabled>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <span class="admin-folder-name">
+                        <span class="admin-folder-icon" aria-hidden="true">▣</span>
+                        Shared Media
+                      </span>
+                    </td>
+                    <td class="admin-folder-path">
+                      <code>/Shared Media/</code>
+                    </td>
+                    <td><span class="admin-badge badge-active">Active</span></td>
+                    <td>
+                      <button type="button" class="admin-row-delete" disabled>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <span class="admin-folder-name">
+                        <span class="admin-folder-icon" aria-hidden="true">▣</span>
+                        Archive 2026
+                      </span>
+                    </td>
+                    <td class="admin-folder-path">
+                      <code>/Archive 2026/</code>
+                    </td>
+                    <td><span class="admin-badge badge-active">Active</span></td>
+                    <td>
+                      <button type="button" class="admin-row-delete" disabled>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <span class="admin-folder-name">
+                        <span class="admin-folder-icon" aria-hidden="true">▣</span>
+                        Marketing Assets
+                      </span>
+                    </td>
+                    <td class="admin-folder-path">
+                      <code>/Marketing Assets/</code>
+                    </td>
+                    <td><span class="admin-badge badge-active">Active</span></td>
+                    <td>
+                      <button type="button" class="admin-row-delete" disabled>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="admin-folder-footer">
+              Folders share the application storage bucket.
+              Existing files are preserved when creating folders.
             </div>
           </section>
 
-          <section id="users-permissions" class="workspace-section glass-panel" aria-labelledby="users-permissions-title">
-            <div class="section-heading">
-              <div><p class="section-eyebrow">Account access</p><h2 id="users-permissions-title">Users &amp; Permissions</h2></div>
+          <!-- ===============================
+               USERS & PERMISSIONS
+               =============================== -->
+          <section id="admin-users" class="admin-section" aria-labelledby="users-title">
+
+            <div class="admin-section-heading">
+              <h2 id="users-title">Users &amp; Permissions</h2>
+              <span class="admin-section-meta">4 users · Demo</span>
             </div>
-            <div class="management-grid">
-              <div class="user-selection">
-                <form id="userSearch" class="form-field">
-                  <label for="userQuery">Search users</label>
-                  <div class="inline-form-control">
-                    <input id="userQuery" name="userQuery" type="search" maxlength="40" placeholder="Search by username">
-                    <button class="secondary-button" type="submit">Search users</button>
+
+            <div class="admin-user-toolbar">
+              <div class="admin-user-search">
+                <input id="userSearch" type="search" placeholder="Search users..." aria-label="Search users">
+              </div>
+              <button id="searchUsers" type="button" class="admin-secondary-button">
+                Search
+              </button>
+            </div>
+
+            <div class="admin-user-table-scroll">
+              <table class="admin-table admin-user-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody id="usersTable">
+                  <tr>
+                    <td><span class="admin-user-name">admin</span></td>
+                    <td>
+                      <span class="admin-badge badge-admin">
+                        Administrator
+                      </span>
+                    </td>
+                    <td><span class="admin-badge badge-active">Active</span></td>
+                    <td>
+                      <button type="button" class="admin-user-manage" disabled>
+                        Manage
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><span class="admin-user-name">wsxzikai</span></td>
+                    <td><span class="admin-badge badge-user">User</span></td>
+                    <td><span class="admin-badge badge-active">Active</span></td>
+                    <td>
+                      <button type="button" class="admin-user-manage" data-user="wsxzikai"
+                        onclick="openUserManagement(this.dataset.user)">
+                        Manage
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><span class="admin-user-name">alex</span></td>
+                    <td><span class="admin-badge badge-user">User</span></td>
+                    <td><span class="admin-badge badge-active">Active</span></td>
+                    <td>
+                      <button type="button" class="admin-user-manage" data-user="alex"
+                        onclick="openUserManagement(this.dataset.user)">
+                        Manage
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><span class="admin-user-name">emily</span></td>
+                    <td><span class="admin-badge badge-user">User</span></td>
+                    <td><span class="admin-badge badge-disabled">Disabled</span></td>
+                    <td>
+                      <button type="button" class="admin-user-manage" data-user="emily"
+                        onclick="openUserManagement(this.dataset.user)">
+                        Manage
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- ===============================
+               INVITATIONS
+               =============================== -->
+          <section id="admin-invitations" class="admin-section" aria-labelledby="invitations-title">
+
+            <div class="admin-section-heading">
+              <h2 id="invitations-title">Invitations</h2>
+              <span class="admin-section-meta">
+                Administrator invitations
+              </span>
+            </div>
+
+            <div class="admin-section-scroll">
+              <div class="admin-group">
+                <h3>Invite another administrator</h3>
+                <p class="admin-description">
+                  Invitations are valid for 24 hours and can be
+                  redeemed once by the named account.
+                </p>
+
+                <div class="admin-field">
+                  <label for="websiteAddress">
+                    Website address the recipient can open
+                  </label>
+                  <input id="websiteAddress" type="url" placeholder="https://example.com">
+                </div>
+
+                <div class="admin-inline-form">
+                  <div class="admin-field">
+                    <label for="invitationUsername">
+                      Registered username
+                    </label>
+                    <input id="invitationUsername" type="text" placeholder="Enter username">
                   </div>
-                </form>
-                <div class="form-field">
-                  <label for="users">Select user</label>
-                  <select id="users" name="user">
-                    <option value="">Select a user</option>
+
+                  <button id="findAccount" type="button" class="admin-secondary-button">
+                    Find account
+                  </button>
+                </div>
+
+                <div class="admin-field admin-field-medium">
+                  <label for="invitationAccount">
+                    Select an account for invitation
+                  </label>
+                  <select id="invitationAccount">
+                    <option value="">Select account</option>
+                    <option value="wsxzikai">wsxzikai</option>
                   </select>
                 </div>
-                <p id="userDetails" class="user-details" aria-live="polite">Selected user details will appear here.</p>
-              </div>
-              <div class="permission-management">
-                <h3>Folder permission</h3>
-                <p>Choose a permission for the selected user and folder.</p>
-                <div class="form-field">
-                  <label for="permission">Permission level</label>
-                  <select id="permission" name="permission">
-                    <option value="READ">READ — View and download</option>
-                    <option value="WRITE">WRITE — Upload, view, and download</option>
-                  </select>
-                </div>
-                <div class="section-actions">
-                  <button id="grant" class="primary-button" type="button" disabled>Grant / save permission</button>
-                  <button id="revoke" class="secondary-button" type="button" disabled>Revoke permission</button>
+
+                <div class="admin-actions">
+                  <button id="createInvitation" type="button" class="admin-primary-button">
+                    Create invitation
+                  </button>
                 </div>
               </div>
-            </div>
-            <div class="account-actions">
-              <h3>Account actions</h3>
-              <p>Password reset applies to the selected user. Deactivation cannot be undone here.</p>
-              <button type="button" id="resetPassword" class="secondary-button">Create password-reset link</button>
-              <button type="button" id="deleteUser" class="danger-button">Deactivate selected user</button>
-              <small>Other administrators are protected. Password-reset links require an active account.</small>
+
+              <div class="admin-divider"></div>
+
+              <div class="admin-group">
+                <h3>Invitation link</h3>
+
+                <div class="admin-inline-form">
+                  <div class="admin-field">
+                    <label for="invitationLink">Generated link</label>
+                    <input id="invitationLink" type="text" readonly placeholder="No invitation link generated">
+                  </div>
+
+                  <button id="copyInvitationLink" type="button" class="admin-secondary-button">
+                    Copy invitation link
+                  </button>
+                </div>
+              </div>
+
+              <div class="admin-divider"></div>
+
+              <div class="admin-group">
+                <h3>Invitation history</h3>
+
+                <div class="admin-table-scroll">
+                  <table class="admin-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Account</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>newadmin</td>
+                        <td>Oct 14, 2026</td>
+                        <td>
+                          <span class="admin-badge badge-pending">
+                            Pending
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>member01</td>
+                        <td>Oct 12, 2026</td>
+                        <td>
+                          <span class="admin-badge badge-accepted">
+                            Accepted
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </section>
 
-          <section id="administrator-invitations" class="workspace-section glass-panel" aria-labelledby="administrator-invitations-title">
-            <div class="section-heading">
-              <div><p class="section-eyebrow">Administrator access</p><h2 id="administrator-invitations-title">Administrator Invitations</h2></div>
+          <!-- ===============================
+               SYSTEM LOGS
+               =============================== -->
+          <section id="admin-logs" class="admin-section" aria-labelledby="logs-title">
+
+            <div class="admin-section-heading">
+              <h2 id="logs-title">System Logs</h2>
+              <span class="admin-section-meta">System audit records</span>
             </div>
-            <form id="inviteAdmin" class="form-stack">
-              <div class="form-field">
-                <label for="invitationOrigin">Website address the recipient can open</label>
-                <input id="invitationOrigin" name="invitationOrigin" type="url" autocomplete="url" required>
-              </div>
-              <div class="form-field">
-                <label for="inviteUsername">Search registered users</label>
-                <div class="inline-form-control">
-                  <input id="inviteUsername" name="inviteUsername" maxlength="40" list="userNames" placeholder="Registered username" required>
-                  <datalist id="userNames"></datalist>
-                  <button type="button" id="inviteSearch" class="secondary-button">Find account</button>
+
+            <div class="admin-section-scroll">
+              <div class="admin-log-controls">
+                <div class="admin-field">
+                  <label for="logsSearch">Search logs</label>
+                  <input id="logsSearch" type="search" placeholder="Search events...">
                 </div>
+
+                <div class="admin-field">
+                  <label for="logsFilter">Level</label>
+                  <select id="logsFilter">
+                    <option value="all">All levels</option>
+                    <option value="INFO">Info</option>
+                    <option value="WARNING">Warning</option>
+                    <option value="ERROR">Error</option>
+                  </select>
+                </div>
+
+                <button id="refreshLogs" type="button" class="admin-secondary-button">
+                  Refresh
+                </button>
               </div>
-              <div class="form-field">
-                <label for="inviteUsers">Select an invitation recipient</label>
-                <select id="inviteUsers" name="inviteUser">
-                  <option value="">Select a registered user</option>
-                </select>
+
+              <div class="admin-table-scroll">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Timestamp</th>
+                      <th scope="col">Level</th>
+                      <th scope="col">Event</th>
+                      <th scope="col">User</th>
+                      <th scope="col">Details</th>
+                    </tr>
+                  </thead>
+                  <tbody id="logsTable">
+                    <tr>
+                      <td>2026-10-14 10:42</td>
+                      <td><span class="admin-badge badge-info">INFO</span></td>
+                      <td>User signed in</td>
+                      <td>admin</td>
+                      <td>Successful authentication</td>
+                    </tr>
+                    <tr>
+                      <td>2026-10-14 09:18</td>
+                      <td><span class="admin-badge badge-info">INFO</span></td>
+                      <td>Permission updated</td>
+                      <td>admin</td>
+                      <td>Folder access changed</td>
+                    </tr>
+                    <tr>
+                      <td>2026-10-13 16:30</td>
+                      <td>
+                        <span class="admin-badge badge-warning">
+                          WARNING
+                        </span>
+                      </td>
+                      <td>Failed login attempt</td>
+                      <td>Unknown</td>
+                      <td>Invalid credentials</td>
+                    </tr>
+                    <tr>
+                      <td>2026-10-12 11:05</td>
+                      <td><span class="admin-badge badge-error">ERROR</span></td>
+                      <td>Integrity verification failed</td>
+                      <td>wsxzikai</td>
+                      <td>Archive verification failed</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <div class="section-actions">
-                <button class="primary-button" type="submit">Generate administrator invitation</button>
-              </div>
-            </form>
-            <p class="field-note">Invitation links are valid for 24 hours and can be redeemed once by the named account.</p>
-            <div class="result-panel">
-              <label for="invitationLink">Administrator invitation link</label>
-              <textarea id="invitationLink" name="invitationLink" readonly rows="3" aria-describedby="invitationLinkHelp"></textarea>
-              <small id="invitationLinkHelp">Share this link privately with the selected registered user.</small>
-              <button type="button" id="copyInvitation" class="secondary-button">Copy invitation link</button>
+
+              <p class="admin-help">
+                Example log records for UI preview.
+              </p>
             </div>
           </section>
 
-          <section id="password-reset-management" class="workspace-section glass-panel" aria-labelledby="password-reset-title">
-            <div class="section-heading">
-              <div><p class="section-eyebrow">Account recovery</p><h2 id="password-reset-title">Password Reset Management</h2></div>
-            </div>
-            <p>Select an active user account to generate a password-reset link. Links expire after one hour and can be used once.</p>
-            <div class="form-field">
-              <label for="resetAccount">Select user account</label>
-              <select id="resetAccount" name="resetAccount">
-                <option value="">Select a user account</option>
-              </select>
-            </div>
-            <div class="section-actions">
-              <button id="generateResetLink" class="primary-button" type="button">Generate password-reset link</button>
-            </div>
-            <p id="resetRecipient" class="recipient-summary" aria-live="polite"></p>
-            <div class="result-panel">
-              <label for="resetLink">Password-reset link</label>
-              <textarea id="resetLink" name="resetLink" readonly rows="3" aria-describedby="resetLinkHelp"></textarea>
-              <small id="resetLinkHelp">Send generated reset links to their intended recipients privately.</small>
-              <button type="button" id="copyReset" class="secondary-button">Copy password-reset link</button>
-            </div>
-          </section>
         </div>
-      </main>
+      </section>
+    </main>
 
-      <footer class="home-footer">
-        <span>MMIV · Media Migration and Integrity Validation</span>
-        <span>Administration</span>
-      </footer>
+    <footer class="home-footer">
+      <span>MMIV · Media Migration and Integrity Validation</span>
+      <span>Administration</span>
+    </footer>
+  </div>
+
+  <!-- ===============================
+       CREATE FOLDER DIALOG
+       =============================== -->
+  <dialog id="createFolderDialog" class="admin-dialog">
+    <div class="admin-dialog-content">
+      <div class="admin-dialog-heading">
+        <h2>Create folder</h2>
+        <button type="button" class="admin-dialog-close" aria-label="Close"
+          onclick="document.getElementById('createFolderDialog').close()">
+          ×
+        </button>
+      </div>
+
+      <div class="admin-field">
+        <label for="folderName">Folder name</label>
+        <input id="folderName" name="folderName" type="text" placeholder="Enter folder name" required>
+      </div>
+
+      <p class="admin-description">
+        The new folder will share the application storage bucket.
+        Existing files will not be modified.
+      </p>
+
+      <div class="admin-dialog-actions">
+        <button type="button" class="admin-secondary-button"
+          onclick="document.getElementById('createFolderDialog').close()">
+          Cancel
+        </button>
+        <button id="createFolder" type="button" class="admin-primary-button" disabled>
+          Create folder
+        </button>
+      </div>
     </div>
-  </body>
+  </dialog>
+
+  <!-- ===============================
+       USER MANAGEMENT DIALOG
+       =============================== -->
+  <dialog id="userManagementDialog" class="admin-management-dialog">
+    <div class="admin-management-dialog-inner">
+
+      <div class="admin-management-header">
+        <h2>Manage user</h2>
+
+        <button type="button" class="admin-dialog-close" aria-label="Close dialog"
+          onclick="document.getElementById('userManagementDialog').close()">
+          ×
+        </button>
+      </div>
+
+      <div class="admin-management-body">
+
+        <div class="admin-field">
+          <label for="selectedUser">Selected user</label>
+          <select id="selectedUser">
+            <option value="">Select user</option>
+            <option value="wsxzikai">wsxzikai</option>
+            <option value="alex">alex</option>
+            <option value="emily">emily</option>
+          </select>
+        </div>
+
+        <div class="admin-divider"></div>
+
+        <h3>Folder permissions</h3>
+
+        <div class="admin-field">
+          <label for="permissionFolder">Filter folders</label>
+          <select id="permissionFolder">
+            <option value="">Select folder</option>
+            <option value="asw001">asw001</option>
+            <option value="test">test</option>
+          </select>
+        </div>
+
+        <p class="admin-help">
+          Administrators have access to all folders.
+        </p>
+
+        <fieldset class="admin-permission-options">
+          <legend>Permission</legend>
+
+          <label>
+            <input type="radio" name="permission" value="READ">
+            View and download
+          </label>
+
+          <label>
+            <input type="radio" name="permission" value="WRITE">
+            Upload, view and download
+          </label>
+        </fieldset>
+
+        <div class="admin-actions">
+          <button id="savePermission" type="button" class="admin-primary-button" disabled>
+            Save permission
+          </button>
+          <button id="revokePermission" type="button" class="admin-secondary-button" disabled>
+            Revoke permission
+          </button>
+        </div>
+
+        <div class="admin-divider"></div>
+
+        <h3>Account actions</h3>
+        <p class="admin-help">
+          Other administrators are protected.
+          Password-reset links require an active account.
+        </p>
+
+        <div class="admin-actions">
+          <button id="createResetLink" type="button" class="admin-secondary-button" disabled>
+            Create password-reset link
+          </button>
+          <button id="deactivateUser" type="button" class="admin-danger-button" disabled>
+            Deactivate selected user
+          </button>
+        </div>
+
+        <div class="admin-divider"></div>
+
+        <h3>Password-reset link</h3>
+        <p class="admin-description">
+          Choose a user, then create a reset link.
+          Send it privately. Links expire after one hour
+          and can be used once.
+        </p>
+
+        <div class="admin-field">
+          <label for="resetLink">Generated link</label>
+          <input id="resetLink" type="text" readonly placeholder="No password-reset link generated">
+        </div>
+
+        <button id="copyResetLink" type="button" class="admin-secondary-button" disabled>
+          Copy password-reset link
+        </button>
+
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Existing background effects -->
+  <script src="../js/particles.min.js"></script>
+  <script src="../js/particles-effect.js"></script>
+
+  <!-- UI-only dialog selection -->
+  <script>
+    function openUserManagement(username) {
+      const dialog = document.getElementById('userManagementDialog');
+      const select = document.getElementById('selectedUser');
+
+      select.value = username;
+      dialog.showModal();
+    }
+  </script>
+
+</body>
+
 </html>
