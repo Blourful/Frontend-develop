@@ -77,9 +77,8 @@
 
         <!-- Explorer toolbar -->
         <div class="explorer-toolbar">
-        
           <h1 id="explorer-title">Files</h1>
-        
+
           <div class="toolbar-actions">
         
             <!-- Minimal refresh -->
@@ -130,10 +129,7 @@
         
           <!-- Folder selector -->
           <div class="location-field">
-        
-            <label for="folder">Folder</label>
-        
-            <select id="folder" name="folder">
+            <select id="folder" name="folder" aria-label="Folder">
               <option value="">Select a folder</option>
               <option value="Project Atlas">Project Atlas</option>
               <option value="Shared Media">Shared Media</option>
@@ -165,12 +161,6 @@
         
         </div>
         
-        <!-- File count -->
-        <div class="explorer-meta">
-          <span id="fileCount">4 items · Demo</span>
-        </div>
-
-
         <p id="browseStatus" class="explorer-status" role="status" aria-live="polite"></p>
 
         <!-- File table -->
@@ -288,6 +278,7 @@
 
         <!-- Explorer footer -->
         <div class="explorer-bottom">
+          <span id="fileCount" class="explorer-count">4 items · Demo</span>
           <span id="listStatus">
             Showing example files
           </span>

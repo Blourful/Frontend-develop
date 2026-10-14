@@ -94,15 +94,14 @@
 
             <div class="admin-section-heading">
               <h2 id="folders-title">Folders</h2>
-              <button id="openCreateFolder" class="admin-primary-button" type="button"
-                onclick="document.getElementById('createFolderDialog').showModal()">
-                Create folder
-              </button>
             </div>
 
             <div class="admin-folder-toolbar">
               <input id="folderSearch" type="search" placeholder="Search folders..." aria-label="Search folders">
-              <span class="admin-folder-count">4 folders · Demo</span>
+              <button id="openCreateFolder" class="admin-primary-button" type="button"
+                onclick="document.getElementById('createFolderDialog').showModal()">
+                Create folder
+              </button>
             </div>
 
             <div class="admin-folder-table-scroll">
@@ -192,9 +191,12 @@
               </table>
             </div>
 
-            <div class="admin-folder-footer">
-              Folders share the application storage bucket.
-              Existing files are preserved when creating folders.
+            <div class="admin-section-footer admin-folder-footer">
+              <span class="admin-section-meta">4 folders · Demo</span>
+              <span>
+                Folders share the application storage bucket.
+                Existing files are preserved when creating folders.
+              </span>
             </div>
           </section>
 
@@ -205,7 +207,6 @@
 
             <div class="admin-section-heading">
               <h2 id="users-title">Users &amp; Permissions</h2>
-              <span class="admin-section-meta">4 users · Demo</span>
             </div>
 
             <div class="admin-user-toolbar">
@@ -282,6 +283,9 @@
                 </tbody>
               </table>
             </div>
+            <div class="admin-section-footer">
+              <span class="admin-section-meta">4 users · Demo</span>
+            </div>
           </section>
 
           <!-- ===============================
@@ -296,29 +300,24 @@
             <div class="admin-section-heading">
           
               <h2 id="invitations-title">Invitations</h2>
-          
-              <button id="openInvitationDialog" type="button" class="admin-primary-button"
-                onclick="document.getElementById('invitationDialog').showModal()">
-                Create invitation
-              </button>
-          
             </div>
           
             <!-- Search toolbar -->
             <div class="admin-invitation-toolbar">
-          
-              <input id="invitationSearch" type="search" placeholder="Search invitations..." aria-label="Search invitations">
-          
+              <div class="admin-invitation-search-group">
+                <input id="invitationSearch" type="search" placeholder="Search invitations..." aria-label="Search invitations">
+                <button id="openInvitationDialog" type="button" class="admin-primary-button"
+                  onclick="document.getElementById('invitationDialog').showModal()">
+                  Create invitation
+                </button>
+              </div>
+
               <select id="invitationStatus" aria-label="Filter invitation status">
                 <option value="all">All statuses</option>
                 <option value="Pending">Pending</option>
                 <option value="Accepted">Accepted</option>
                 <option value="Expired">Expired</option>
               </select>
-          
-              <span class="admin-invitation-count">
-                3 invitations · Demo
-              </span>
           
             </div>
           
@@ -388,9 +387,12 @@
           
             </div>
           
-            <div class="admin-invitation-footer">
-              Invitation links are valid for 24 hours
-              and can be redeemed once by the named account.
+            <div class="admin-section-footer admin-invitation-footer">
+              <span class="admin-section-meta">3 invitations · Demo</span>
+              <span>
+                Invitation links are valid for 24 hours
+                and can be redeemed once by the named account.
+              </span>
             </div>
           
           </section>
@@ -510,19 +512,16 @@
 
             <div class="admin-section-heading">
               <h2 id="logs-title">System Logs</h2>
-              <span class="admin-section-meta">System audit records</span>
             </div>
 
             <div class="admin-section-scroll">
               <div class="admin-log-controls">
                 <div class="admin-field">
-                  <label for="logsSearch">Search logs</label>
-                  <input id="logsSearch" type="search" placeholder="Search events...">
+                  <input id="logsSearch" type="search" placeholder="Search events..." aria-label="Search logs">
                 </div>
 
                 <div class="admin-field">
-                  <label for="logsFilter">Level</label>
-                  <select id="logsFilter">
+                  <select id="logsFilter" aria-label="Filter log level">
                     <option value="all">All levels</option>
                     <option value="INFO">Info</option>
                     <option value="WARNING">Warning</option>
@@ -582,10 +581,10 @@
                   </tbody>
                 </table>
               </div>
-
-              <p class="admin-help">
-                Example log records for UI preview.
-              </p>
+            </div>
+            <div class="admin-section-footer">
+              <span class="admin-section-meta">4 records · Demo</span>
+              <span>Example log records for UI preview.</span>
             </div>
           </section>
 

@@ -110,7 +110,7 @@
     display: grid;
 
     grid-template-columns:
-        minmax(200px, 350px) minmax(150px, 190px) 1fr;
+        minmax(200px, 350px) minmax(150px, 190px);
 
     align-items: center;
     gap: 14px;
@@ -182,8 +182,6 @@
 /* Count */
 
 .activity-count {
-    justify-self: end;
-
     color: #8a99aa;
     font-size: 11px;
     white-space: nowrap;
@@ -296,7 +294,9 @@
     justify-content: space-between;
 
     gap: 12px;
-    margin-top: 14px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--activity-line);
 
     color: #8a99aa;
     font-size: 11px;
@@ -349,11 +349,6 @@
             minmax(180px, 1fr) minmax(150px, 190px);
     }
 
-    .activity-count {
-        grid-column: 1 / -1;
-        justify-self: end;
-    }
-
     .activity-table {
         min-width: 760px;
     }
@@ -363,10 +358,14 @@
 
     .activity-page .activity-main {
         padding: 10px 0;
+        flex: 0 0 auto;
+        overflow: visible;
     }
 
     .activity-workspace {
         padding: 16px 12px;
+        flex: 0 0 auto;
+        min-height: 440px;
     }
 
     .activity-toolbar {
@@ -382,11 +381,6 @@
         gap: 10px;
     }
 
-    .activity-count {
-        grid-column: 1;
-        justify-self: start;
-    }
-
     .activity-table {
         min-width: 700px;
     }
@@ -396,10 +390,21 @@
     }
 }
 
+@media (max-height: 600px) and (min-width: 601px) {
+    .activity-page .activity-main {
+        flex: 0 0 auto;
+        overflow: visible;
+    }
+
+    .activity-workspace {
+        flex: 0 0 auto;
+        min-height: 440px;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
 
     .activity-refresh {
         transition: none;
     }
 }
-

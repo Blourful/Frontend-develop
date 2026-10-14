@@ -31,6 +31,7 @@ html {
 }
 
 body.home-page {
+  margin: 0;
   background: linear-gradient(135deg,
       #f1f7ff 0%,
       #eaf3fc 50%,
@@ -1036,5 +1037,90 @@ body.home-page .mmiv-header {
 
   body.home-page .home-nav a {
     min-height: 36px;
+  }
+}
+
+@media (max-width: 600px) {
+  html {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  body.home-page.file-manager-page,
+  body.home-page.activity-page,
+  body.home-page.admin-page {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .home-page.file-manager-page .home-shell,
+  .home-page.activity-page .home-shell,
+  .home-page.admin-page .home-shell {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  .home-page.file-manager-page .home-main,
+  .home-page.activity-page .home-main,
+  .home-page.admin-page .home-main {
+    flex: 1 0 auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  body.home-page .home-nav {
+    flex-wrap: nowrap;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  body.home-page .home-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  body.home-page .home-nav a {
+    flex: 0 0 auto;
+    padding: 0 4px;
+    font-size: 11px;
+  }
+}
+
+@media (max-height: 600px) and (min-width: 601px) {
+  html {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  body.home-page.file-manager-page,
+  body.home-page.activity-page,
+  body.home-page.admin-page {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .home-page.file-manager-page .home-shell,
+  .home-page.activity-page .home-shell,
+  .home-page.admin-page .home-shell {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  .home-page.file-manager-page .home-main,
+  .home-page.activity-page .home-main,
+  .home-page.admin-page .home-main {
+    flex: 1 0 auto;
+    min-height: 0;
+    overflow: visible;
   }
 }
