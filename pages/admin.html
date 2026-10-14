@@ -1,119 +1,205 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3f7fc">
+    <meta name="description" content="Manage MMIV folders, users, permissions, and administrator links">
     <title>Administration · MMIV</title>
-    <link rel="stylesheet" href="/portal.css" />
+    <link rel="stylesheet" href="../css/home.css">
   </head>
-  <body>
-    <header>
-      <strong>MMIV</strong>
-      <nav>
-        <a href="/home.html">Home</a><a href="/upload.html" data-upload hidden>Upload</a
-        ><a href="/files.html" data-read hidden>Files</a><a href="/history.html">My activity</a
-        ><a href="/logs.html" data-admin hidden>Log dashboard</a>
-      </nav>
-      <button id="logout" type="button">Sign out</button>
-    </header>
-    <main>
-      <h1>Administration</h1>
-      <p id="message" role="status" aria-live="polite"></p>
-      <div id="management" hidden>
-        <section>
-          <h2>Create a folder</h2>
-          <form id="createFolder">
-            <label for="folderName">Folder name</label
-            ><input
-              id="folderName"
-              maxlength="80"
-              pattern="[A-Za-z0-9][A-Za-z0-9 _.\-]{0,79}"
-              placeholder="SW001 or semester2"
-              required
-            /><small
-              >Folders share the application storage bucket. Existing files are preserved.</small
-            ><button>Create folder</button>
-          </form>
-        </section>
-        <section>
-          <h2>User permissions</h2>
-          <div class="row">
-            <div>
-              <form id="userSearch">
-                <label for="userQuery">Search users</label
-                ><input id="userQuery" maxlength="40" placeholder="Username" /><button>
-                  Search
-                </button>
+  <body class="home-page">
+    <div id="particles-js" aria-hidden="true"></div>
+    <div class="fx fx-glow" aria-hidden="true"></div>
+    <div class="fx fx-beam beam-one" aria-hidden="true"></div>
+    <div class="fx fx-beam beam-two" aria-hidden="true"></div>
+    <div class="fx fx-beam beam-three" aria-hidden="true"></div>
+    <div class="fx fx-bokeh bokeh-one" aria-hidden="true"></div>
+    <div class="fx fx-bokeh bokeh-two" aria-hidden="true"></div>
+    <div class="fx fx-bokeh bokeh-three" aria-hidden="true"></div>
+
+    <div class="home-shell">
+      <header class="home-header glass-panel">
+        <a class="home-brand" href="home.html" aria-label="MMIV dashboard">
+          <span class="brand-mark" aria-hidden="true">M</span><span>MMIV<span class="brand-dot">.</span></span>
+        </a>
+        <nav class="home-nav" aria-label="Main navigation">
+          <a href="home.html">Dashboard</a>
+          <a href="file-manager.html">File Manager</a>
+          <a href="activity.html">Activity</a>
+          <a class="active" aria-current="page" href="admin.html" data-admin>Administration <span class="admin-only-label">Admin only</span></a>
+        </nav>
+        <div class="home-account">
+          <div class="account-avatar" aria-hidden="true">MM</div>
+          <div class="account-copy"><strong id="account">MMIV account</strong><span>Workspace profile</span></div>
+          <button id="logout" class="sign-out-btn" type="button">Sign out</button>
+        </div>
+      </header>
+
+      <main class="home-main">
+        <p id="message" class="system-status" role="status" aria-live="polite"></p>
+        <header class="page-intro">
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Administrator workspace</p>
+          <h1>Administration</h1>
+          <p class="welcome-description">Manage destination folders, account permissions, and time-limited administrator and password-reset links.</p>
+        </header>
+
+        <nav class="section-jump glass-panel" aria-label="Administration sections">
+          <a href="#folder-management">Folder Management</a>
+          <a href="#users-permissions">Users &amp; Permissions</a>
+          <a href="#administrator-invitations">Administrator Invitations</a>
+          <a href="#password-reset-management">Password Reset Management</a>
+        </nav>
+
+        <div id="management" class="admin-workspace">
+          <section id="folder-management" class="workspace-section glass-panel" aria-labelledby="folder-management-title">
+            <div class="section-heading">
+              <div><p class="section-eyebrow">Storage organization</p><h2 id="folder-management-title">Folder Management</h2></div>
+            </div>
+            <form id="createFolder" class="form-grid">
+              <div class="form-field">
+                <label for="folderName">New folder name</label>
+                <input id="folderName" name="folderName" maxlength="80" pattern="[A-Za-z0-9][A-Za-z0-9 _.\-]{0,79}" placeholder="SW001 or semester2" required>
+                <small>Folder names may contain letters, numbers, spaces, underscores, periods, and hyphens. Existing files are preserved.</small>
+              </div>
+              <div class="form-field form-field-action">
+                <span class="field-label" aria-hidden="true">Create</span>
+                <button class="primary-button" type="submit">Create folder</button>
+              </div>
+            </form>
+            <div class="management-grid">
+              <form id="folderSearch" class="form-field">
+                <label for="folderQuery">Search and select folders</label>
+                <div class="inline-form-control">
+                  <input id="folderQuery" name="folderQuery" type="search" placeholder="Search folder name">
+                  <button class="secondary-button" type="submit">Search folders</button>
+                </div>
+                <label for="folders">Select folder</label>
+                <select id="folders" name="folder">
+                  <option value="">Select a folder</option>
+                </select>
               </form>
-              <label for="users">Select user</label
-              ><select id="users"></select>
+              <div class="folder-information">
+                <h3>Folder information</h3>
+                <p id="folderInfo">Select a folder to view its available information.</p>
+                <h3>Folder actions</h3>
+                <button type="button" id="deleteFolder" class="danger-button">Delete selected folder</button>
+                <p class="field-note">Deleting a folder is a destructive action. Changes apply to subsequent requests, including existing login sessions.</p>
+              </div>
             </div>
-            <div>
-              <label for="folderQuery">Filter folders</label
-              ><input id="folderQuery" placeholder="Folder name" /><label for="folders"
-                >Select folder</label
-              ><select id="folders"></select>
+          </section>
+
+          <section id="users-permissions" class="workspace-section glass-panel" aria-labelledby="users-permissions-title">
+            <div class="section-heading">
+              <div><p class="section-eyebrow">Account access</p><h2 id="users-permissions-title">Users &amp; Permissions</h2></div>
             </div>
-          </div>
-          <p id="userDetails"></p>
-          <label for="permission">Permission</label
-          ><select id="permission">
-            <option value="READ">View and download</option>
-            <option value="WRITE">Upload, view and download</option></select
-          ><button id="grant" disabled>Save permission</button
-          ><button id="revoke" disabled>Revoke permission</button>
-          <h3>Account actions for the selected user</h3>
-          <button type="button" id="resetPassword">Create password-reset link</button
-          ><button type="button" id="deleteUser" class="danger">Deactivate selected user</button
-          ><small
-            >Other administrators are protected. Password-reset links require an active
-            account.</small
-          >
-          <h3>Folder actions for the selected folder</h3>
-          <button type="button" id="deleteFolder" class="danger">Delete selected folder</button
-          ><small>Changes apply to subsequent requests, including existing login sessions.</small>
-        </section>
-        <section>
-          <h2>Invite another administrator</h2>
-          <form id="inviteAdmin">
-            <label for="invitationOrigin">Website address the recipient can open</label
-            ><input id="invitationOrigin" type="url" required /><label for="inviteUsername"
-              >Registered username</label
-            ><input id="inviteUsername" maxlength="40" required list="userNames" /><datalist
-              id="userNames"
-            ></datalist
-            ><button type="button" id="inviteSearch">Find account</button
-            ><label for="inviteUsers">Select an account for invitation</label
-            ><select id="inviteUsers"></select
-            ><button>Create invitation</button>
-          </form>
-          <small
-            >The invitation is valid for 24 hours and can be redeemed once by the named
-            account.</small
-          ><textarea
-            id="invitationLink"
-            readonly
-            rows="3"
-            aria-label="Administrator invitation link"
-          ></textarea
-          ><button id="copyInvitation">Copy invitation link</button>
-        </section>
-        <section>
-          <h2>Password-reset link</h2>
-          <p>
-            Choose a user in User permissions, then create a reset link. Send it privately. Links
-            expire after one hour and can be used once.
-          </p>
-          <p id="resetRecipient"></p>
-          <textarea id="resetLink" readonly rows="3" aria-label="Password-reset link"></textarea
-          ><button id="copyReset">Copy password-reset link</button>
-        </section>
-      </div>
-    </main>
-    <script src="/feedback.js"></script>
-    <script src="/auth.js"></script>
-    <script src="/portal.js"></script>
-    <script src="/admin.js"></script>
-    <script src="/english-validation.js"></script>
+            <div class="management-grid">
+              <div class="user-selection">
+                <form id="userSearch" class="form-field">
+                  <label for="userQuery">Search users</label>
+                  <div class="inline-form-control">
+                    <input id="userQuery" name="userQuery" type="search" maxlength="40" placeholder="Search by username">
+                    <button class="secondary-button" type="submit">Search users</button>
+                  </div>
+                </form>
+                <div class="form-field">
+                  <label for="users">Select user</label>
+                  <select id="users" name="user">
+                    <option value="">Select a user</option>
+                  </select>
+                </div>
+                <p id="userDetails" class="user-details" aria-live="polite">Selected user details will appear here.</p>
+              </div>
+              <div class="permission-management">
+                <h3>Folder permission</h3>
+                <p>Choose a permission for the selected user and folder.</p>
+                <div class="form-field">
+                  <label for="permission">Permission level</label>
+                  <select id="permission" name="permission">
+                    <option value="READ">READ — View and download</option>
+                    <option value="WRITE">WRITE — Upload, view, and download</option>
+                  </select>
+                </div>
+                <div class="section-actions">
+                  <button id="grant" class="primary-button" type="button" disabled>Grant / save permission</button>
+                  <button id="revoke" class="secondary-button" type="button" disabled>Revoke permission</button>
+                </div>
+              </div>
+            </div>
+            <div class="account-actions">
+              <h3>Account actions</h3>
+              <p>Password reset applies to the selected user. Deactivation cannot be undone here.</p>
+              <button type="button" id="resetPassword" class="secondary-button">Create password-reset link</button>
+              <button type="button" id="deleteUser" class="danger-button">Deactivate selected user</button>
+              <small>Other administrators are protected. Password-reset links require an active account.</small>
+            </div>
+          </section>
+
+          <section id="administrator-invitations" class="workspace-section glass-panel" aria-labelledby="administrator-invitations-title">
+            <div class="section-heading">
+              <div><p class="section-eyebrow">Administrator access</p><h2 id="administrator-invitations-title">Administrator Invitations</h2></div>
+            </div>
+            <form id="inviteAdmin" class="form-stack">
+              <div class="form-field">
+                <label for="invitationOrigin">Website address the recipient can open</label>
+                <input id="invitationOrigin" name="invitationOrigin" type="url" autocomplete="url" required>
+              </div>
+              <div class="form-field">
+                <label for="inviteUsername">Search registered users</label>
+                <div class="inline-form-control">
+                  <input id="inviteUsername" name="inviteUsername" maxlength="40" list="userNames" placeholder="Registered username" required>
+                  <datalist id="userNames"></datalist>
+                  <button type="button" id="inviteSearch" class="secondary-button">Find account</button>
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="inviteUsers">Select an invitation recipient</label>
+                <select id="inviteUsers" name="inviteUser">
+                  <option value="">Select a registered user</option>
+                </select>
+              </div>
+              <div class="section-actions">
+                <button class="primary-button" type="submit">Generate administrator invitation</button>
+              </div>
+            </form>
+            <p class="field-note">Invitation links are valid for 24 hours and can be redeemed once by the named account.</p>
+            <div class="result-panel">
+              <label for="invitationLink">Administrator invitation link</label>
+              <textarea id="invitationLink" name="invitationLink" readonly rows="3" aria-describedby="invitationLinkHelp"></textarea>
+              <small id="invitationLinkHelp">Share this link privately with the selected registered user.</small>
+              <button type="button" id="copyInvitation" class="secondary-button">Copy invitation link</button>
+            </div>
+          </section>
+
+          <section id="password-reset-management" class="workspace-section glass-panel" aria-labelledby="password-reset-title">
+            <div class="section-heading">
+              <div><p class="section-eyebrow">Account recovery</p><h2 id="password-reset-title">Password Reset Management</h2></div>
+            </div>
+            <p>Select an active user account to generate a password-reset link. Links expire after one hour and can be used once.</p>
+            <div class="form-field">
+              <label for="resetAccount">Select user account</label>
+              <select id="resetAccount" name="resetAccount">
+                <option value="">Select a user account</option>
+              </select>
+            </div>
+            <div class="section-actions">
+              <button id="generateResetLink" class="primary-button" type="button">Generate password-reset link</button>
+            </div>
+            <p id="resetRecipient" class="recipient-summary" aria-live="polite"></p>
+            <div class="result-panel">
+              <label for="resetLink">Password-reset link</label>
+              <textarea id="resetLink" name="resetLink" readonly rows="3" aria-describedby="resetLinkHelp"></textarea>
+              <small id="resetLinkHelp">Send generated reset links to their intended recipients privately.</small>
+              <button type="button" id="copyReset" class="secondary-button">Copy password-reset link</button>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="home-footer">
+        <span>MMIV · Media Migration and Integrity Validation</span>
+        <span>Administration</span>
+      </footer>
+    </div>
   </body>
 </html>

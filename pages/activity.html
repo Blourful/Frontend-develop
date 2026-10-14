@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3f7fc">
+    <meta name="description" content="Review MMIV user activity and administrator system logs">
+    <title>Activity &amp; Logs · MMIV</title>
+    <link rel="stylesheet" href="../css/home.css">
+  </head>
+  <body class="home-page">
+    <div id="particles-js" aria-hidden="true"></div>
+    <div class="fx fx-glow" aria-hidden="true"></div>
+    <div class="fx fx-beam beam-one" aria-hidden="true"></div>
+    <div class="fx fx-beam beam-two" aria-hidden="true"></div>
+    <div class="fx fx-beam beam-three" aria-hidden="true"></div>
+    <div class="fx fx-bokeh bokeh-one" aria-hidden="true"></div>
+    <div class="fx fx-bokeh bokeh-two" aria-hidden="true"></div>
+    <div class="fx fx-bokeh bokeh-three" aria-hidden="true"></div>
+
+    <div class="home-shell">
+      <header class="home-header glass-panel">
+        <a class="home-brand" href="home.html" aria-label="MMIV dashboard">
+          <span class="brand-mark" aria-hidden="true">M</span><span>MMIV<span class="brand-dot">.</span></span>
+        </a>
+        <nav class="home-nav" aria-label="Main navigation">
+          <a href="home.html">Dashboard</a>
+          <a href="file-manager.html">File Manager</a>
+          <a class="active" aria-current="page" href="activity.html">Activity</a>
+          <a href="admin.html" data-admin>Administration <span class="admin-only-label">Admin only</span></a>
+        </nav>
+        <div class="home-account">
+          <div class="account-avatar" aria-hidden="true">MM</div>
+          <div class="account-copy"><strong id="account">MMIV account</strong><span>Workspace profile</span></div>
+          <button id="logout" class="sign-out-btn" type="button">Sign out</button>
+        </div>
+      </header>
+
+      <main class="home-main">
+        <p id="status" class="system-status" role="status" aria-live="polite"></p>
+        <header class="page-intro">
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Workspace records</p>
+          <h1>Activity &amp; Logs</h1>
+          <p class="welcome-description">Review your file operations or, for administrators, inspect migration and system events.</p>
+        </header>
+
+        <nav class="section-jump glass-panel" aria-label="Activity sections">
+          <a href="#my-activity">My Activity</a>
+          <a href="#system-logs">System Logs <span class="admin-only-label">Admin only</span></a>
+        </nav>
+
+        <section id="my-activity" class="workspace-section glass-panel" aria-labelledby="my-activity-title">
+          <div class="section-heading">
+            <div><p class="section-eyebrow">Personal history</p><h2 id="my-activity-title">My Activity</h2></div>
+            <button id="refresh" class="secondary-button" type="button">Refresh activity</button>
+          </div>
+          <p>Your uploads, downloads, and deletions. Recent activity may take a few seconds to appear.</p>
+          <p id="activityStatus" class="inline-status" role="status" aria-live="polite"></p>
+          <div class="table-scroll">
+            <table class="activity-table">
+              <caption>Your upload, download, and deletion history</caption>
+              <thead>
+                <tr><th scope="col">Date and time</th><th scope="col">Action type</th><th scope="col">Folder name</th><th scope="col">File name</th><th scope="col">Operation status</th></tr>
+              </thead>
+              <tbody id="entries"></tbody>
+            </table>
+          </div>
+          <p id="activityEmpty" class="empty-state">No activity to display on this page.</p>
+          <nav class="pagination" aria-label="My activity pages">
+            <button id="previous" class="secondary-button" type="button" disabled>Previous</button>
+            <span class="pagination-current" aria-live="polite">Activity page</span>
+            <button id="next" class="secondary-button" type="button">Next</button>
+          </nav>
+        </section>
+
+        <section id="system-logs" class="workspace-section glass-panel admin-section" aria-labelledby="system-logs-title" data-admin>
+          <div class="section-heading">
+            <div>
+              <p class="section-eyebrow">Administrator view · Restricted</p>
+              <h2 id="system-logs-title">System Logs</h2>
+            </div>
+            <span class="admin-only-label">Admin only</span>
+          </div>
+          <p class="admin-notice">System event history, migration activity, and service events are intended for administrator review.</p>
+          <div class="filter-toolbar">
+            <div class="form-field">
+              <label for="logFolder">Filter by folder</label>
+              <select id="logFolder" name="folder">
+                <option value="">All system events</option>
+              </select>
+            </div>
+            <button id="logRefresh" class="secondary-button" type="button">Refresh logs</button>
+          </div>
+          <p id="logStatus" class="inline-status" role="status" aria-live="polite"></p>
+          <div class="table-scroll">
+            <table class="log-table">
+              <caption>Administrator system event, migration, and service logs</caption>
+              <thead>
+                <tr><th scope="col">Event timestamp</th><th scope="col">Event type</th><th scope="col">Service</th><th scope="col">Folder</th><th scope="col">Event details</th></tr>
+              </thead>
+              <tbody id="logEntries"></tbody>
+            </table>
+          </div>
+          <details class="log-details-help">
+            <summary>About expandable event details</summary>
+            <p>Open the details control on a log entry to review its structured event payload.</p>
+          </details>
+          <p id="logEmpty" class="empty-state">No system events to display on this page.</p>
+          <nav class="pagination" aria-label="System log pages">
+            <button id="logPrevious" class="secondary-button" type="button" disabled>Previous</button>
+            <span class="pagination-current" aria-live="polite">Log page</span>
+            <button id="logNext" class="secondary-button" type="button">Next</button>
+          </nav>
+        </section>
+      </main>
+
+      <footer class="home-footer">
+        <span>MMIV · Media Migration and Integrity Validation</span>
+        <span>Activity &amp; Logs</span>
+      </footer>
+    </div>
+  </body>
+</html>
