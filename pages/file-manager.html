@@ -78,96 +78,101 @@
       <!-- Explorer panel -->
       <section class="explorer glass-panel" id="browse-files" aria-labelledby="explorer-title">
 
-        <!-- Toolbar -->
+        <!-- Explorer toolbar -->
         <div class="explorer-toolbar">
-
-          <div>
-            <h1 id="explorer-title">Files</h1>
-            <p class="explorer-subtitle">
-              Browse and manage your workspace files.
-            </p>
-          </div>
-
+        
+          <h1 id="explorer-title">Files</h1>
+        
           <div class="toolbar-actions">
-
-            <button id="refreshFiles" class="icon-button" type="button" title="Refresh files"
-              aria-label="Refresh files">
-              ↻
+        
+            <!-- Minimal refresh -->
+            <button id="refreshFiles" class="refresh-button" type="button" aria-label="Refresh files" title="Refresh files">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 7v5h-5"></path>
+                <path d="M4 17v-5h5"></path>
+                <path d="M5.5 9A7 7 0 0 1 18 7l2 5"></path>
+                <path d="M18.5 15A7 7 0 0 1 6 17l-2-5"></path>
+              </svg>
             </button>
-
-            <!-- Native HTML upload menu -->
+        
+            <!-- Text-only upload -->
             <details class="upload-menu">
-
+        
               <summary class="primary-button">
-                <span aria-hidden="true">↑</span>
-                Upload
-                <span aria-hidden="true">⌄</span>
+                <span>Upload</span>
+                <svg class="upload-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
               </summary>
 
+        
               <div class="upload-dropdown">
+        
                 <a href="#upload-file">
-                  <span aria-hidden="true">↑</span>
                   Upload file
                 </a>
-
+        
                 <a href="#upload-folder">
-                  <span aria-hidden="true">▣</span>
                   Upload folder
                 </a>
+        
               </div>
-
+        
             </details>
-
+        
           </div>
+        
         </div>
 
+
         <!-- Folder selector -->
-        <div class="explorer-location">
-
+        <!-- Unified Explorer Controls -->
+        <div class="explorer-controls">
+        
+          <!-- Folder selector -->
           <div class="location-field">
+        
             <label for="folder">Folder</label>
-
+        
             <select id="folder" name="folder">
-              <option value="">
-                Select a folder
-              </option>
-              <option value="Project Atlas">
-                Project Atlas
-              </option>
-              <option value="Shared Media">
-                Shared Media
-              </option>
-              <option value="Marketing Assets">
-                Marketing Assets
-              </option>
-              <option value="Archive 2026">
-                Archive 2026
-              </option>
+              <option value="">Select a folder</option>
+              <option value="Project Atlas">Project Atlas</option>
+              <option value="Shared Media">Shared Media</option>
+              <option value="Marketing Assets">Marketing Assets</option>
+              <option value="Archive 2026">Archive 2026</option>
             </select>
+        
           </div>
-
+        
+          <!-- Breadcrumb -->
           <nav id="breadcrumbs" class="breadcrumbs" aria-label="Folder path">
             <span>Workspace</span>
             <span aria-hidden="true">›</span>
             <span>Project Atlas</span>
           </nav>
-
-        </div>
-
-        <!-- Search -->
-        <div class="explorer-search-row">
-
+        
+          <!-- Search -->
           <div class="search-field">
-            <span aria-hidden="true">⌕</span>
-
+        
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-4-4"></path>
+            </svg>
+        
             <input id="fileSearch" type="search" placeholder="Search files..." aria-label="Search files">
+        
           </div>
-
-          <span class="file-count" id="fileCount">
-            4 items · Demo
-          </span>
-
+        
         </div>
+        
+        <!-- File count -->
+        <div class="explorer-meta">
+          <span id="fileCount">4 items · Demo</span>
+        </div>
+
 
         <p id="browseStatus" class="explorer-status" role="status" aria-live="polite"></p>
 
@@ -284,13 +289,15 @@
           This folder is empty.
         </p>
 
+        <!-- Explorer footer -->
         <div class="explorer-bottom">
-          <span>Showing example files</span>
-
-          <button id="more" class="secondary-button" type="button">
-            Load more
-          </button>
+          <span id="listStatus">
+            Showing example files
+          </span>
         </div>
+
+        <!-- Infinite scroll trigger -->
+        <div id="loadSentinel" aria-hidden="true"></div>
 
       </section>
 
