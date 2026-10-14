@@ -15,18 +15,20 @@ requestAnimationFrame(function movement() {
   const xValue = calcValue(pos.x, window.innerWidth)
   const yValue = calcValue(pos.y, window.innerHeight)
 
-  document.querySelector(
-    '#media-layer-view'
-  ).style.transform = `translate3d(${xValue}px, ${yValue}px, 0) rotateX(${-yValue}deg) rotateY(${xValue}deg)`
-  document.querySelector('#media-layer-front').style.transform = `translate3d(${
-    xValue * 7.7
-  }px, ${yValue * 3}px, 50px) rotateX(${-yValue}deg) rotateY(${
-    xValue
-  }deg)`
+  const mediaView = document.querySelector('#media-layer-view')
+  const mediaFront = document.querySelector('#media-layer-front')
+  if (mediaView && mediaFront) {
+    mediaView.style.transform = `translate3d(${xValue}px, ${yValue}px, 0) rotateX(${-yValue}deg) rotateY(${xValue}deg)`
+    mediaFront.style.transform = `translate3d(${
+      xValue * 7.7
+    }px, ${yValue * 3}px, 50px) rotateX(${-yValue}deg) rotateY(${
+      xValue
+    }deg)`
+  }
 
-  const login = document.querySelector('#login-form')
-  if (login) {
-    login.style.transform = `perspective(5000px) translate3d(${xValue * 3}px, ${
+  const authCard = document.querySelector('#login-form, #signupForm, .reset-card')
+  if (authCard) {
+    authCard.style.transform = `perspective(5000px) translate3d(${xValue * 3}px, ${
       yValue * 2
     }px, 50px) rotateX(${-yValue}deg) rotateY(${xValue}deg)`
   }

@@ -23,14 +23,54 @@
     margin-top: 1rem;
 }
 
+/* MMIV 右上角品牌标题 */
+.mmiv-header {
+    position: fixed;
+    top: 30px;
+    right: 48px;
+    z-index: 100;
+
+    font-family: 'Bender', sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 4px;
+
+    color: #ffffff;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    user-select: none;
+    pointer-events: none;
+}
+
+/* 标题后面的蓝色圆点 */
+.mmiv-header span {
+    color: #87bbff;
+}
+
+/* 手机端适配 */
+@media (max-width: 600px) {
+    .mmiv-header {
+        top: 18px;
+        right: 20px;
+        font-size: 24px;
+    }
+}
+@font-face {
+    font-family: 'Bender';
+    src: url('../font/Bender.woff') format('woff');
+    font-display: swap;
+}
+
+
+
+
 .login-wrap {
     position: fixed;
     inset: 0;
     z-index: 10;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-end;
-    padding: 0 3rem 3rem 0;
+    padding: 1rem 3rem 1rem 0;
     pointer-events: none;
 }
 
@@ -160,6 +200,87 @@
     text-decoration: underline;
 }
 
+.signup-wrap {
+    align-items: center;
+    padding: 1rem 3rem 1rem 0;
+}
+
+.signup-card {
+    width: 420px;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+}
+
+.signup-card h1 {
+    letter-spacing: 2px;
+}
+
+.signup-password {
+    position: relative;
+}
+
+.signup-password input {
+    padding-right: 68px;
+}
+
+.signup-card .password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    width: auto;
+    padding: 6px 8px;
+    transform: translateY(-50%);
+    background: transparent;
+    color: #0078d4;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0;
+}
+
+.signup-card .password-toggle:hover {
+    background: transparent;
+    color: #106ebe;
+}
+
+.signup-card .signup-rules {
+    margin: 0 0 18px;
+    color: #6b7686;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.signup-card #submit {
+    letter-spacing: 1px;
+}
+
+.signup-card button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+.signup-card .msg {
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+    .signup-wrap {
+        justify-content: center;
+        padding: 1rem;
+    }
+}
+
+@media (max-height: 600px) {
+    .signup-wrap {
+        align-items: flex-start;
+        overflow-y: auto;
+    }
+
+    .signup-card {
+        max-height: none;
+        margin: 1rem 0;
+    }
+}
+
 /* ===== 白色底面 + Fluent 扁平风 ===== */
 html,
 body {
@@ -268,4 +389,91 @@ body {
 .fx-fore {
     z-index: 20;
     filter: blur(28px);
+}
+
+/* Reset password layout */
+/* Reset Password 页面：卡片正中央 */
+.reset-page .login-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+/* Reset Password 卡片 */
+.reset-page .reset-card {
+    position: relative;
+    width: 360px;
+    max-width: 100%;
+    margin: 0;
+    pointer-events: auto;
+    z-index: 11;
+}
+
+/* 小屏幕适配 */
+@media (max-width: 600px) {
+    .reset-page .login-wrap {
+        padding: 16px;
+    }
+
+    .reset-page .reset-card {
+        width: 100%;
+        max-width: 360px;
+    }
+}
+.reset-page .reset-card {
+    width: 360px;
+    max-width: 100%;
+    pointer-events: auto;
+}
+
+/* Description */
+.reset-description {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #68778d;
+    margin: 12px 0 24px;
+}
+
+/* Status message */
+.reset-card #status {
+    margin-top: 16px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+/* Back to login */
+.reset-back {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.reset-back a {
+    color: #0078d4;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.reset-back a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+    .reset-page .login-wrap {
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .reset-page .reset-card {
+        width: 100%;
+    }
 }
