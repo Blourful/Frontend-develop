@@ -1,0 +1,1009 @@
+/* ==========================================
+   MMIV FILE MANAGER — EXPLORER EDITION
+   ========================================== */
+
+.file-manager-page {
+    --fm-primary: #0878ce;
+    --fm-primary-dark: #075ca8;
+    --fm-text: #203149;
+    --fm-muted: #738399;
+    --fm-line: rgba(110, 155, 200, 0.16);
+    --fm-soft: rgba(235, 244, 253, 0.72);
+}
+
+/* Main layout */
+
+.file-manager-page .explorer-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    width: 100%;
+    padding: 38px 0;
+}
+
+/* ==========================================
+   Explorer panel
+   ========================================== */
+
+.explorer {
+    width: 100%;
+    max-width: 1180px;
+    min-width: 0;
+
+    padding: 28px 30px;
+    border-radius: 8px;
+}
+
+/* Toolbar */
+
+.explorer-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    margin-bottom: 28px;
+}
+
+.explorer-toolbar h1 {
+    margin: 0;
+    color: var(--fm-text);
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.explorer-subtitle {
+    margin: 7px 0 0;
+    color: var(--fm-muted);
+    font-size: 12px;
+}
+
+.toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ==========================================
+   Buttons
+   ========================================== */
+
+.primary-button,
+.secondary-button,
+.icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 39px;
+    padding: 9px 16px;
+
+    border-radius: 6px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 650;
+
+    cursor: pointer;
+    text-decoration: none;
+
+    transition:
+        background 0.2s,
+        border-color 0.2s;
+}
+
+.primary-button {
+    gap: 10px;
+
+    border: 1px solid var(--fm-primary);
+
+    color: white;
+    background: var(--fm-primary);
+}
+
+.primary-button:hover {
+    background: var(--fm-primary-dark);
+}
+
+.secondary-button,
+.icon-button {
+    border: 1px solid rgba(0, 120, 212, 0.18);
+    color: var(--fm-primary);
+    background: rgba(255, 255, 255, 0.75);
+}
+
+.secondary-button:hover,
+.icon-button:hover {
+    background: #e8f4ff;
+}
+
+.icon-button {
+    width: 39px;
+    padding: 0;
+    font-size: 20px;
+}
+
+/* ==========================================
+   Upload dropdown
+   ========================================== */
+
+.upload-menu {
+    position: relative;
+}
+
+.upload-menu summary {
+    list-style: none;
+}
+
+.upload-menu summary::-webkit-details-marker {
+    display: none;
+}
+
+.upload-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 20;
+
+    min-width: 190px;
+    padding: 6px;
+
+    border: 1px solid rgba(135, 175, 215, 0.22);
+    border-radius: 8px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    box-shadow:
+        0 12px 28px rgba(40, 70, 120, 0.13);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.upload-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px;
+
+    border-radius: 6px;
+
+    color: var(--fm-text);
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.upload-dropdown a:hover {
+    background: #eaf4ff;
+    color: var(--fm-primary);
+}
+
+/* ==========================================
+   Folder location
+   ========================================== */
+
+.explorer-location {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+.location-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    width: 300px;
+    max-width: 100%;
+}
+
+.location-field label,
+.form-field label {
+    color: #52677f;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.location-field select,
+.form-field select {
+    width: 100%;
+    min-height: 43px;
+
+    padding: 10px 13px;
+
+    border: 1px solid rgba(100, 145, 190, 0.23);
+    border-radius: 6px;
+
+    color: var(--fm-text);
+    background: rgba(255, 255, 255, 0.72);
+
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.location-field select:focus,
+.form-field select:focus,
+.search-field input:focus {
+    outline: 2px solid rgba(0, 120, 212, 0.35);
+    outline-offset: 2px;
+}
+
+/* Breadcrumbs */
+
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    min-height: 43px;
+
+    color: #72849b;
+    font-size: 12px;
+}
+
+/* ==========================================
+   Search
+   ========================================== */
+
+.explorer-search-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+.search-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 350px;
+    max-width: 100%;
+
+    padding: 0 13px;
+
+    border: 1px solid var(--fm-line);
+    border-radius: 6px;
+
+    background: rgba(255, 255, 255, 0.65);
+}
+
+.search-field>span {
+    color: #8b9aac;
+    font-size: 23px;
+}
+
+.search-field input {
+    width: 100%;
+    min-height: 39px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+    color: var(--fm-text);
+
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.search-field input::placeholder {
+    color: #9aa7b7;
+}
+
+.file-count {
+    color: #8a99aa;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+/* ==========================================
+   File table
+   ========================================== */
+
+.file-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+
+    border: 1px solid var(--fm-line);
+    border-radius: 8px;
+}
+
+.explorer-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.explorer-table th {
+    padding: 14px 16px;
+
+    background: rgba(235, 244, 253, 0.55);
+
+    color: #718198;
+    font-size: 11px;
+    font-weight: 650;
+
+    white-space: nowrap;
+}
+
+.explorer-table td {
+    padding: 14px 16px;
+
+    border-top: 1px solid var(--fm-line);
+
+    color: #6b7c92;
+    font-size: 12px;
+}
+
+.explorer-table tbody tr:hover {
+    background: rgba(235, 244, 253, 0.38);
+}
+
+.file-name {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    min-width: 170px;
+
+    color: #263951;
+    font-weight: 600;
+}
+
+.file-icon {
+    width: 35px;
+    height: 35px;
+
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+
+    border-radius: 6px;
+
+    background: #e5f2ff;
+    color: var(--fm-primary);
+
+    font-size: 10px;
+    font-weight: 750;
+}
+
+.folder-type {
+    font-size: 21px;
+}
+
+.pdf-type {
+    background: #ffe9e8;
+    color: #c94e4e;
+}
+
+.zip-type {
+    background: #f0ebff;
+    color: #725bd2;
+}
+
+.video-type {
+    background: #e5f4ff;
+    color: #2675bb;
+}
+
+.table-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.table-action {
+    padding: 6px 9px;
+
+    border: 1px solid rgba(0, 120, 212, 0.15);
+    border-radius: 5px;
+
+    background: rgba(255, 255, 255, 0.65);
+    color: var(--fm-primary);
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.table-action:hover {
+    background: #e8f4ff;
+}
+
+/* ==========================================
+   Explorer footer
+   ========================================== */
+
+.explorer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    margin-top: 20px;
+}
+
+.explorer-bottom>span {
+    color: #8a99aa;
+    font-size: 11px;
+}
+
+.explorer-status {
+    color: #8190a3;
+    font-size: 12px;
+}
+
+.explorer-status:empty {
+    display: none;
+}
+
+.empty-folder {
+    margin: 18px 0;
+    padding: 28px;
+
+    border: 1px dashed var(--fm-line);
+    border-radius: 8px;
+
+    color: #8190a3;
+    text-align: center;
+    font-size: 12px;
+}
+
+/* ==========================================
+   Upload panels
+   ========================================== */
+
+.upload-panel {
+    display: none;
+
+    width: 100%;
+    max-width: 800px;
+
+    padding: 28px 30px;
+    border-radius: 8px;
+}
+
+.upload-panel:target {
+    display: block;
+}
+
+.panel-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin-bottom: 26px;
+}
+
+.panel-heading h2 {
+    margin: 0;
+    color: var(--fm-text);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.panel-heading p {
+    margin: 8px 0 0;
+    color: var(--fm-muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.close-panel {
+    display: grid;
+    place-items: center;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 6px;
+
+    color: #718198 !important;
+    text-decoration: none;
+    font-size: 22px;
+}
+
+.close-panel:hover {
+    background: #e8f4ff;
+}
+
+/* ==========================================
+   Forms
+   ========================================== */
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    margin-bottom: 22px;
+}
+
+.dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    min-height: 185px;
+    padding: 25px 20px;
+
+    border: 1px dashed rgba(70, 135, 200, 0.35);
+    border-radius: 8px;
+
+    background: rgba(235, 244, 253, 0.45);
+
+    text-align: center;
+}
+
+.dropzone-icon {
+    display: grid;
+    place-items: center;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 8px;
+
+    background: #e2f0ff;
+    color: var(--fm-primary);
+
+    font-size: 24px;
+}
+
+.dropzone strong {
+    color: var(--fm-text);
+    font-size: 14px;
+}
+
+.dropzone p {
+    margin: 0;
+    color: var(--fm-muted);
+    font-size: 11px;
+}
+
+.dropzone input[type="file"] {
+    max-width: 100%;
+    margin-top: 10px;
+
+    color: #738399;
+    font-family: inherit;
+    font-size: 11px;
+}
+
+.form-help {
+    margin: -8px 0 22px;
+    color: #8a99aa;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* ==========================================
+   Upload progress and results
+   ========================================== */
+
+.upload-feedback {
+    margin-top: 25px;
+    padding: 20px;
+
+    border: 1px solid var(--fm-line);
+    border-radius: 8px;
+
+    background: rgba(235, 244, 253, 0.4);
+}
+
+.upload-feedback h3 {
+    margin: 0 0 14px;
+
+    color: var(--fm-text);
+    font-size: 13px;
+}
+
+.upload-feedback progress {
+    width: 100%;
+    height: 9px;
+
+    accent-color: var(--fm-primary);
+}
+
+.upload-feedback p {
+    color: #8190a3;
+    font-size: 11px;
+}
+
+.upload-feedback pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+
+    color: #52677f;
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.upload-feedback pre:empty {
+    display: none;
+}
+
+/* ==========================================
+   Folder upload summary
+   ========================================== */
+
+.upload-summary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.upload-summary>div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    padding: 16px;
+
+    border: 1px solid var(--fm-line);
+    border-radius: 8px;
+
+    background: var(--fm-soft);
+}
+
+.upload-summary span {
+    color: var(--fm-muted);
+    font-size: 11px;
+}
+
+.upload-summary strong {
+    color: var(--fm-text);
+    font-size: 21px;
+}
+
+/* ==========================================
+   Accessibility
+   ========================================== */
+
+.visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+
+    padding: 0;
+    margin: -1px;
+
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ==========================================
+   Responsive
+   ========================================== */
+
+@media (max-width: 900px) {
+    .explorer {
+        padding: 24px;
+    }
+
+    .explorer-location {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .location-field {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .file-manager-page .explorer-main {
+        padding: 22px 0;
+    }
+
+    .explorer,
+    .upload-panel {
+        padding: 20px 15px;
+    }
+
+    .explorer-toolbar {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .explorer-toolbar h1 {
+        font-size: 22px;
+    }
+
+    .explorer-search-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .search-field {
+        width: 100%;
+    }
+
+    .explorer-table {
+        min-width: 680px;
+    }
+
+    .upload-summary {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .upload-summary>div {
+        padding: 12px;
+    }
+
+    .explorer-bottom {
+        flex-wrap: wrap;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .primary-button,
+    .secondary-button,
+    .table-action {
+        transition: none;
+    }
+}
+
+/* ==========================================
+   FILE MANAGER - NO PAGE SCROLL
+   ========================================== */
+
+.file-manager-page .explorer-main {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+
+    justify-content: flex-start;
+}
+
+.file-manager-page .explorer {
+    flex: 1;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+/* File list scrolls inside the card */
+.file-manager-page .file-table-wrap {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+}
+
+/* Upload panels use internal scrolling */
+.file-manager-page .upload-panel:target {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+/* ==========================================
+   FILE MANAGER TYPOGRAPHY
+   ========================================== */
+
+.file-manager-page .explorer-toolbar h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+}
+
+.file-manager-page .explorer-table {
+    font-family: 'Inter', sans-serif;
+}
+
+.file-manager-page .explorer-table th {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.file-manager-page .explorer-table td {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.file-manager-page .file-name {
+    font-weight: 500;
+}
+
+.file-manager-page .primary-button,
+.file-manager-page .secondary-button,
+.file-manager-page .table-action {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0;
+}
+
+/* ==========================================
+   FILE MANAGER UI SCALE - APPROX. 110%
+   ========================================== */
+
+@media (min-width: 1101px) {
+
+    .file-manager-page .explorer {
+        max-width: 1298px;
+        padding: 31px 33px;
+    }
+
+    .file-manager-page .explorer-toolbar h1 {
+        font-size: 27px;
+    }
+
+    .file-manager-page .explorer-subtitle {
+        font-size: 13px;
+    }
+
+    .file-manager-page .location-field label,
+    .file-manager-page .form-field label {
+        font-size: 13px;
+    }
+
+    .file-manager-page .location-field select,
+    .file-manager-page .form-field select {
+        min-height: 47px;
+        font-size: 13px;
+    }
+
+    .file-manager-page .search-field input {
+        min-height: 43px;
+        font-size: 13px;
+    }
+
+    .file-manager-page .explorer-table th {
+        font-size: 12px;
+        padding: 15px 18px;
+    }
+
+    .file-manager-page .explorer-table td {
+        font-size: 13px;
+        padding: 15px 18px;
+    }
+
+    .file-manager-page .primary-button,
+    .file-manager-page .secondary-button {
+        font-size: 13px;
+        min-height: 43px;
+    }
+
+    .file-manager-page .upload-panel {
+        max-width: 880px;
+        padding: 31px 33px;
+    }
+}
+
+/* ==========================================
+   MMIV FILE MANAGER - COMPACT SPACING
+   ========================================== */
+
+/* Main content spacing */
+.file-manager-page .explorer-main {
+    padding: 12px 0;
+    gap: 12px;
+}
+
+/* Main glass panel */
+.file-manager-page .explorer {
+    padding: 20px 24px;
+}
+
+/* Heading */
+.file-manager-page .explorer-toolbar {
+    margin-bottom: 16px;
+    gap: 12px;
+}
+
+.file-manager-page .explorer-subtitle {
+    margin-top: 4px;
+}
+
+/* Folder selector and breadcrumbs */
+.file-manager-page .explorer-location {
+    margin-bottom: 14px;
+    gap: 14px;
+}
+
+.file-manager-page .location-field {
+    gap: 5px;
+}
+
+.file-manager-page .breadcrumbs {
+    min-height: 36px;
+}
+
+/* Search bar */
+.file-manager-page .explorer-search-row {
+    margin-bottom: 12px;
+}
+
+/* Table rows */
+.file-manager-page .explorer-table th {
+    padding: 10px 14px;
+}
+
+.file-manager-page .explorer-table td {
+    padding: 10px 14px;
+}
+
+/* Bottom actions */
+.file-manager-page .explorer-bottom {
+    margin-top: 12px;
+}
+
+/* Upload panels */
+.file-manager-page .upload-panel {
+    padding: 20px 24px;
+}
+
+.file-manager-page .panel-heading {
+    margin-bottom: 16px;
+}
+
+.file-manager-page .form-field {
+    margin-bottom: 14px;
+}
+
+.file-manager-page .dropzone {
+    min-height: 145px;
+    padding: 16px;
+}
+
+.file-manager-page .upload-feedback {
+    margin-top: 14px;
+    padding: 16px;
+}
+
+/* Desktop 110% override */
+@media (min-width: 1101px) {
+    .file-manager-page .explorer {
+        padding: 22px 26px;
+    }
+
+    .file-manager-page .explorer-table th,
+    .file-manager-page .explorer-table td {
+        padding: 11px 15px;
+    }
+
+    .file-manager-page .upload-panel {
+        padding: 22px 26px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .file-manager-page .explorer-main {
+        padding: 10px 0;
+    }
+
+    .file-manager-page .explorer,
+    .file-manager-page .upload-panel {
+        padding: 16px 12px;
+    }
+}

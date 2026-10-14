@@ -1,185 +1,493 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f3f7fc">
-    <meta name="description" content="Browse and upload files in the MMIV workspace">
-    <title>File Manager · MMIV</title>
-    <link rel="stylesheet" href="../css/home.css">
-  </head>
-  <body class="home-page">
-    <div id="particles-js" aria-hidden="true"></div>
-    <div class="fx fx-glow" aria-hidden="true"></div>
-    <div class="fx fx-beam beam-one" aria-hidden="true"></div>
-    <div class="fx fx-beam beam-two" aria-hidden="true"></div>
-    <div class="fx fx-beam beam-three" aria-hidden="true"></div>
-    <div class="fx fx-bokeh bokeh-one" aria-hidden="true"></div>
-    <div class="fx fx-bokeh bokeh-two" aria-hidden="true"></div>
-    <div class="fx fx-bokeh bokeh-three" aria-hidden="true"></div>
 
-    <div class="home-shell">
-      <header class="home-header glass-panel">
-        <a class="home-brand" href="home.html" aria-label="MMIV dashboard">
-          <span class="brand-mark" aria-hidden="true">M</span><span>MMIV<span class="brand-dot">.</span></span>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#eaf3fc">
+  <meta name="description" content="MMIV File Manager">
+
+  <title>File Manager · MMIV</title>
+
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/file-manager.css">
+</head>
+
+<body class="home-page file-manager-page">
+
+  <!-- Background -->
+  <div id="particles-js" aria-hidden="true"></div>
+
+  <div class="fx fx-glow" aria-hidden="true"></div>
+  <div class="fx fx-beam beam-one" aria-hidden="true"></div>
+  <div class="fx fx-beam beam-two" aria-hidden="true"></div>
+  <div class="fx fx-beam beam-three" aria-hidden="true"></div>
+  <div class="fx fx-bokeh bokeh-one" aria-hidden="true"></div>
+  <div class="fx fx-bokeh bokeh-two" aria-hidden="true"></div>
+  <div class="fx fx-bokeh bokeh-three" aria-hidden="true"></div>
+
+  <div class="home-shell">
+
+    <!-- Header -->
+    <header class="home-header glass-panel">
+
+      <nav class="home-nav" aria-label="Main navigation">
+        <a href="home.html">Home</a>
+
+        <a href="file-manager.html" class="active" aria-current="page">
+          File Manager
         </a>
-        <nav class="home-nav" aria-label="Main navigation">
-          <a href="home.html">Dashboard</a>
-          <a class="active" aria-current="page" href="file-manager.html">File Manager</a>
-          <a href="activity.html">Activity</a>
-          <a href="admin.html" data-admin>Administration <span class="admin-only-label">Admin only</span></a>
-        </nav>
+
+        <a href="activity.html">Activity</a>
+
+        <a href="activity.html#system-logs" data-admin hidden>
+          Logs
+        </a>
+
+        <a href="admin.html" data-admin hidden>
+          Administration
+        </a>
+      </nav>
+
+      <div class="header-right">
+
         <div class="home-account">
           <div class="account-avatar" aria-hidden="true">MM</div>
-          <div class="account-copy"><strong id="account">MMIV account</strong><span>Workspace profile</span></div>
-          <button id="logout" class="sign-out-btn" type="button">Sign out</button>
-        </div>
-      </header>
 
-      <main class="home-main">
-        <p id="status" class="system-status" role="status" aria-live="polite"></p>
-        <header class="page-intro">
-          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Workspace</p>
-          <h1>File Manager</h1>
-          <p class="welcome-description">Browse permitted folders, upload individual files, or transfer a folder with its nested structure.</p>
-        </header>
-
-        <nav class="section-jump glass-panel" aria-label="File Manager sections">
-          <a href="#browse-files">Browse Files</a>
-          <a href="#upload-files">Upload Files</a>
-          <a href="#upload-folder">Upload Folder</a>
-        </nav>
-
-        <section id="browse-files" class="workspace-section glass-panel" aria-labelledby="browse-title">
-          <div class="section-heading">
-            <div><p class="section-eyebrow">Explore workspace</p><h2 id="browse-title">Browse Files</h2></div>
-            <p class="section-description">Choose an accessible destination and open a file to preview or download it.</p>
+          <div class="account-copy">
+            <strong id="account">MMIV account</strong>
+            <span>Workspace member</span>
           </div>
-          <div class="form-grid">
-            <div class="form-field">
-              <label for="folder">Folder</label>
-              <select id="folder" name="folder">
-                <option value="">Select a folder</option>
-              </select>
+
+          <button id="logout" class="sign-out-btn" type="button">
+            Sign out
+          </button>
+        </div>
+
+        <a class="mmiv-header" href="home.html" aria-label="MMIV Home">
+          MMIV<span>.</span>
+        </a>
+
+      </div>
+    </header>
+
+    <main class="home-main explorer-main">
+
+      <p id="status" class="system-status" role="status" aria-live="polite"></p>
+
+      <!-- Explorer panel -->
+      <section class="explorer glass-panel" id="browse-files" aria-labelledby="explorer-title">
+
+        <!-- Toolbar -->
+        <div class="explorer-toolbar">
+
+          <div>
+            <h1 id="explorer-title">Files</h1>
+            <p class="explorer-subtitle">
+              Browse and manage your workspace files.
+            </p>
+          </div>
+
+          <div class="toolbar-actions">
+
+            <button id="refreshFiles" class="icon-button" type="button" title="Refresh files"
+              aria-label="Refresh files">
+              ↻
+            </button>
+
+            <!-- Native HTML upload menu -->
+            <details class="upload-menu">
+
+              <summary class="primary-button">
+                <span aria-hidden="true">↑</span>
+                Upload
+                <span aria-hidden="true">⌄</span>
+              </summary>
+
+              <div class="upload-dropdown">
+                <a href="#upload-file">
+                  <span aria-hidden="true">↑</span>
+                  Upload file
+                </a>
+
+                <a href="#upload-folder">
+                  <span aria-hidden="true">▣</span>
+                  Upload folder
+                </a>
+              </div>
+
+            </details>
+
+          </div>
+        </div>
+
+        <!-- Folder selector -->
+        <div class="explorer-location">
+
+          <div class="location-field">
+            <label for="folder">Folder</label>
+
+            <select id="folder" name="folder">
+              <option value="">
+                Select a folder
+              </option>
+              <option value="Project Atlas">
+                Project Atlas
+              </option>
+              <option value="Shared Media">
+                Shared Media
+              </option>
+              <option value="Marketing Assets">
+                Marketing Assets
+              </option>
+              <option value="Archive 2026">
+                Archive 2026
+              </option>
+            </select>
+          </div>
+
+          <nav id="breadcrumbs" class="breadcrumbs" aria-label="Folder path">
+            <span>Workspace</span>
+            <span aria-hidden="true">›</span>
+            <span>Project Atlas</span>
+          </nav>
+
+        </div>
+
+        <!-- Search -->
+        <div class="explorer-search-row">
+
+          <div class="search-field">
+            <span aria-hidden="true">⌕</span>
+
+            <input id="fileSearch" type="search" placeholder="Search files..." aria-label="Search files">
+          </div>
+
+          <span class="file-count" id="fileCount">
+            4 items · Demo
+          </span>
+
+        </div>
+
+        <p id="browseStatus" class="explorer-status" role="status" aria-live="polite"></p>
+
+        <!-- File table -->
+        <div class="file-table-wrap">
+
+          <table class="explorer-table">
+            <caption class="visually-hidden">
+              Files and folders in the selected location
+            </caption>
+
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Size</th>
+                <th scope="col">Modified</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="files">
+
+              <!-- Mock folder -->
+              <tr>
+                <td>
+                  <span class="file-name">
+                    <span class="file-icon folder-type">▣</span>
+                    <span>Documents</span>
+                  </span>
+                </td>
+                <td>Folder</td>
+                <td>—</td>
+                <td>Oct 14, 2026</td>
+                <td>
+                  <button type="button" class="table-action">
+                    Open
+                  </button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <span class="file-name">
+                    <span class="file-icon pdf-type">PDF</span>
+                    <span>Migration-plan.pdf</span>
+                  </span>
+                </td>
+                <td>PDF document</td>
+                <td>2.4 MB</td>
+                <td>Oct 14, 2026</td>
+                <td>
+                  <div class="table-actions">
+                    <button type="button" class="table-action">
+                      Preview
+                    </button>
+                    <button type="button" class="table-action">
+                      Download
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <span class="file-name">
+                    <span class="file-icon zip-type">ZIP</span>
+                    <span>Campaign-assets.zip</span>
+                  </span>
+                </td>
+                <td>Archive</td>
+                <td>84 MB</td>
+                <td>Oct 13, 2026</td>
+                <td>
+                  <div class="table-actions">
+                    <button type="button" class="table-action">
+                      Preview
+                    </button>
+                    <button type="button" class="table-action">
+                      Download
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <span class="file-name">
+                    <span class="file-icon video-type">MP4</span>
+                    <span>Product-preview.mp4</span>
+                  </span>
+                </td>
+                <td>Video</td>
+                <td>72 MB</td>
+                <td>Oct 12, 2026</td>
+                <td>
+                  <div class="table-actions">
+                    <button type="button" class="table-action">
+                      Preview
+                    </button>
+                    <button type="button" class="table-action">
+                      Download
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+
+        <p id="emptyFolder" class="empty-folder" hidden>
+          This folder is empty.
+        </p>
+
+        <div class="explorer-bottom">
+          <span>Showing example files</span>
+
+          <button id="more" class="secondary-button" type="button">
+            Load more
+          </button>
+        </div>
+
+      </section>
+
+      <!-- Upload file panel -->
+      <section id="upload-file" class="upload-panel glass-panel" aria-labelledby="upload-file-title">
+
+        <div class="panel-heading">
+          <div>
+            <h2 id="upload-file-title">Upload file</h2>
+            <p>
+              Select a destination and choose a file.
+            </p>
+          </div>
+
+          <a href="#browse-files" class="close-panel" aria-label="Close upload file panel">
+            ×
+          </a>
+        </div>
+
+        <form id="uploadForm">
+
+          <div class="form-field">
+            <label for="destination">
+              Destination folder
+            </label>
+
+            <select id="destination" name="destination" required>
+              <option value="">
+                Select destination
+              </option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="file">Select file</label>
+
+            <div class="dropzone">
+              <span class="dropzone-icon" aria-hidden="true">↑</span>
+
+              <strong>Choose a file</strong>
+
+              <p>
+                Maximum file size: 100 MiB
+              </p>
+
+              <input id="file" name="file" type="file"
+                accept=".png,.jpg,.jpeg,.mp4,.mp3,.txt,.pdf,.ppt,.pptx,.doc,.docx">
             </div>
           </div>
-          <nav id="breadcrumbs" class="folder-breadcrumbs" aria-label="Folder path"></nav>
-          <p id="browseStatus" class="inline-status" role="status" aria-live="polite"></p>
-          <div class="table-scroll">
-            <table class="file-table">
-              <caption class="visually-hidden">Files in the selected folder</caption>
+
+          <p class="form-help">
+            Supported formats: PNG, JPG, JPEG, MP4, MP3,
+            TXT, PDF, PPT, PPTX, DOC and DOCX.
+          </p>
+
+          <button id="submit" type="submit" class="primary-button">
+            Upload file
+          </button>
+
+        </form>
+
+        <div class="upload-feedback">
+          <h3>Upload progress</h3>
+
+          <progress id="uploadProgress" max="100" value="0"></progress>
+
+          <p id="uploadProgressLabel" role="status">
+            No upload in progress.
+          </p>
+
+          <pre id="result"></pre>
+
+          <div id="links" hidden>
+            <button id="preview" type="button">
+              Preview
+            </button>
+
+            <a id="download">Download</a>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Upload folder panel -->
+      <section id="upload-folder" class="upload-panel glass-panel" aria-labelledby="upload-folder-title">
+
+        <div class="panel-heading">
+          <div>
+            <h2 id="upload-folder-title">
+              Upload folder
+            </h2>
+            <p>
+              Upload multiple files while preserving
+              nested folder paths.
+            </p>
+          </div>
+
+          <a href="#browse-files" class="close-panel" aria-label="Close upload folder panel">
+            ×
+          </a>
+        </div>
+
+        <form id="folderForm">
+
+          <div class="form-field">
+            <label for="folderDestination">
+              Destination folder
+            </label>
+
+            <select id="folderDestination" name="folderDestination" required>
+              <option value="">
+                Select destination
+              </option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="folderPicker">
+              Select folder
+            </label>
+
+            <div class="dropzone">
+              <span class="dropzone-icon" aria-hidden="true">▣</span>
+
+              <strong>Choose a folder</strong>
+
+              <p>
+                Up to 500 files · 100 MiB total
+              </p>
+
+              <input id="folderPicker" name="folder" type="file" webkitdirectory multiple>
+            </div>
+          </div>
+
+          <div class="upload-summary">
+            <div>
+              <span>Selected files</span>
+              <strong id="selectedFileCount">0</strong>
+            </div>
+
+            <div>
+              <span>Total size</span>
+              <strong id="totalUploadSize">0 B</strong>
+            </div>
+          </div>
+
+          <button id="folderSubmit" type="submit" class="primary-button">
+            Upload folder
+          </button>
+
+        </form>
+
+        <div id="folderProgress" class="upload-feedback">
+
+          <h3>Folder upload progress</h3>
+
+          <progress id="folderProgressBar" max="100" value="0"></progress>
+
+          <p id="folderProgressLabel" role="status">
+            No upload in progress.
+          </p>
+
+          <pre id="folderResult"></pre>
+
+          <div class="file-table-wrap">
+            <table class="explorer-table">
+              <caption>Per-file upload results</caption>
               <thead>
                 <tr>
-                  <th scope="col">File name</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Size</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Actions</th>
+                  <th>Relative path</th>
+                  <th>Status</th>
+                  <th>Integrity</th>
+                  <th>Details</th>
                 </tr>
               </thead>
-              <tbody id="files"></tbody>
+              <tbody id="folderFileResults"></tbody>
             </table>
           </div>
-          <p class="empty-state" id="emptyFolder">This folder is empty, or no files match the current folder selection.</p>
-          <div class="section-actions">
-            <button id="more" class="secondary-button" type="button" hidden>Load more</button>
-          </div>
-        </section>
 
-        <section id="upload-files" class="workspace-section glass-panel" aria-labelledby="upload-title">
-          <div class="section-heading">
-            <div><p class="section-eyebrow">Single-file transfer</p><h2 id="upload-title">Upload Files</h2></div>
-            <p class="section-description">Select one file for upload and integrity verification.</p>
-          </div>
-          <form id="uploadForm" class="form-stack">
-            <div class="form-field">
-              <label for="destination">Destination folder</label>
-              <select id="destination" name="destination">
-                <option value="">Select a folder</option>
-              </select>
-              <p id="destinationStatus" class="inline-status" role="status" aria-live="polite"></p>
-            </div>
-            <div class="form-field">
-              <span class="field-label">File to upload</span>
-              <div class="file-picker-row">
-                <button id="chooseFile" class="secondary-button" type="button">Choose file</button>
-                <span id="fileSelection" aria-live="polite">No file selected</span>
-              </div>
-              <input class="visually-hidden" id="file" name="file" type="file" accept=".png,.jpg,.jpeg,.mp4,.mp3,.txt,.pdf,.ppt,.pptx,.doc,.docx" aria-label="Choose a file to upload">
-              <small id="supportedFormats">Supported formats: PNG, JPG, JPEG, MP4, MP3, TXT, PDF, PPT, PPTX, DOC, and DOCX. Maximum file size: 100 MiB. Empty files are not supported.</small>
-            </div>
-            <div class="section-actions">
-              <button id="submit" class="primary-button" type="submit">Upload file</button>
-            </div>
-          </form>
-          <div class="upload-progress-block" aria-labelledby="upload-progress-title">
-            <h3 id="upload-progress-title">Upload progress</h3>
-            <progress id="uploadProgress" max="100" value="0">0%</progress>
-            <p id="uploadProgressLabel" role="status" aria-live="polite">No upload in progress.</p>
-          </div>
-          <div class="result-panel">
-            <h3>Upload result and integrity verification</h3>
-            <pre id="result" class="result-message" role="status" aria-live="polite"></pre>
-            <div id="links" class="result-actions" hidden>
-              <button id="preview" class="secondary-button" type="button">Preview file</button>
-              <a id="download" class="secondary-link">Download file</a>
-              <a href="#browse-files" class="secondary-link">Return to file list</a>
-            </div>
-          </div>
-        </section>
+        </div>
 
-        <section id="upload-folder" class="workspace-section glass-panel" aria-labelledby="folder-upload-title">
-          <div class="section-heading">
-            <div><p class="section-eyebrow">Nested folder transfer</p><h2 id="folder-upload-title">Upload Folder</h2></div>
-            <p class="section-description">Preserve relative paths while uploading a folder and its supported files.</p>
-          </div>
-          <form id="folderForm" class="form-stack">
-            <div class="form-field">
-              <label for="folderDestination">Destination folder</label>
-              <select id="folderDestination" name="folderDestination">
-                <option value="">Select a folder</option>
-              </select>
-            </div>
-            <div class="form-field">
-              <span class="field-label">Folder to upload</span>
-              <div class="file-picker-row">
-                <button id="chooseFolder" class="secondary-button" type="button">Choose folder</button>
-                <span id="folderSelection" aria-live="polite">No folder selected</span>
-              </div>
-              <input class="visually-hidden" id="folderPicker" name="folder" type="file" webkitdirectory multiple aria-label="Choose a folder including nested files">
-              <small>Nested folder paths are preserved. Up to 500 files and 100 MiB total. Supported formats: PNG, JPG, JPEG, MP4, MP3, TXT, PDF, PPT, PPTX, DOC, and DOCX. Empty files and empty folders are not supported.</small>
-            </div>
-            <dl class="selection-summary">
-              <div><dt>Selected files</dt><dd id="selectedFileCount">0</dd></div>
-              <div><dt>Total upload size</dt><dd id="totalUploadSize">0 B</dd></div>
-            </dl>
-            <div class="section-actions">
-              <button id="folderSubmit" class="primary-button" type="submit">Upload folder</button>
-            </div>
-          </form>
-          <div id="folderProgress" class="upload-progress-block">
-            <h3>Overall folder upload progress</h3>
-            <progress id="folderProgressBar" max="100" value="0">0%</progress>
-            <p id="folderProgressLabel" role="status" aria-live="polite">No folder upload in progress.</p>
-          </div>
-          <div class="result-panel">
-            <h3>Per-file upload and integrity results</h3>
-            <pre id="folderResult" class="result-message" role="status" aria-live="polite"></pre>
-            <div class="table-scroll">
-              <table class="upload-results-table">
-                <caption>Result for each file in the selected folder</caption>
-                <thead><tr><th scope="col">Relative path</th><th scope="col">Status</th><th scope="col">Integrity</th><th scope="col">Details</th></tr></thead>
-                <tbody id="folderFileResults"></tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-      </main>
+      </section>
 
-      <footer class="home-footer">
-        <span>MMIV · Media Migration and Integrity Validation</span>
-        <span>File Manager</span>
-      </footer>
-    </div>
-  </body>
+    </main>
+
+    <footer class="home-footer">
+      <span>
+        MMIV · Media Migration and Integrity Validation
+      </span>
+      <span>File Manager</span>
+    </footer>
+
+  </div>
+
+  <script src="../js/particles.min.js"></script>
+  <script src="../js/particles-effect.js"></script>
+
+</body>
+
 </html>
