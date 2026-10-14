@@ -287,116 +287,221 @@
           <!-- ===============================
                INVITATIONS
                =============================== -->
+          <!-- ==========================================
+               INVITATIONS - EXPLORER
+               ========================================== -->
+          
           <section id="admin-invitations" class="admin-section" aria-labelledby="invitations-title">
-
+          
             <div class="admin-section-heading">
+          
               <h2 id="invitations-title">Invitations</h2>
-              <span class="admin-section-meta">
-                Administrator invitations
-              </span>
+          
+              <button id="openInvitationDialog" type="button" class="admin-primary-button"
+                onclick="document.getElementById('invitationDialog').showModal()">
+                Create invitation
+              </button>
+          
             </div>
-
-            <div class="admin-section-scroll">
-              <div class="admin-group">
-                <h3>Invite another administrator</h3>
+          
+            <!-- Search toolbar -->
+            <div class="admin-invitation-toolbar">
+          
+              <input id="invitationSearch" type="search" placeholder="Search invitations..." aria-label="Search invitations">
+          
+              <select id="invitationStatus" aria-label="Filter invitation status">
+                <option value="all">All statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Accepted">Accepted</option>
+                <option value="Expired">Expired</option>
+              </select>
+          
+              <span class="admin-invitation-count">
+                3 invitations · Demo
+              </span>
+          
+            </div>
+          
+            <!-- Invitation table -->
+            <div class="admin-invitation-table-scroll">
+          
+              <table class="admin-table admin-invitation-table">
+          
+                <thead>
+                  <tr>
+                    <th scope="col">Account</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Expires</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+          
+                <tbody id="invitationsTable">
+          
+                  <tr>
+                    <td>newadmin</td>
+                    <td>Oct 14, 2026</td>
+                    <td>Oct 15, 2026</td>
+                    <td>
+                      <span class="admin-badge badge-pending">
+                        Pending
+                      </span>
+                    </td>
+                    <td>
+                      <button type="button" class="admin-invitation-action" disabled>
+                        Copy link
+                      </button>
+                    </td>
+                  </tr>
+          
+                  <tr>
+                    <td>member01</td>
+                    <td>Oct 12, 2026</td>
+                    <td>Oct 13, 2026</td>
+                    <td>
+                      <span class="admin-badge badge-accepted">
+                        Accepted
+                      </span>
+                    </td>
+                    <td>
+                      <span class="admin-muted">Redeemed</span>
+                    </td>
+                  </tr>
+          
+                  <tr>
+                    <td>guest01</td>
+                    <td>Oct 10, 2026</td>
+                    <td>Oct 11, 2026</td>
+                    <td>
+                      <span class="admin-badge badge-expired">
+                        Expired
+                      </span>
+                    </td>
+                    <td>
+                      <span class="admin-muted">Unavailable</span>
+                    </td>
+                  </tr>
+          
+                </tbody>
+              </table>
+          
+            </div>
+          
+            <div class="admin-invitation-footer">
+              Invitation links are valid for 24 hours
+              and can be redeemed once by the named account.
+            </div>
+          
+          </section>
+          <!-- ==========================================
+               CREATE INVITATION DIALOG
+               ========================================== -->
+          
+          <dialog id="invitationDialog" class="admin-management-dialog admin-invitation-dialog">
+          
+            <div class="admin-management-dialog-inner">
+          
+              <div class="admin-management-header">
+          
+                <h2>Create invitation</h2>
+          
+                <button type="button" class="admin-dialog-close" aria-label="Close dialog"
+                  onclick="document.getElementById('invitationDialog').close()">
+                  ×
+                </button>
+          
+              </div>
+          
+              <div class="admin-management-body">
+          
                 <p class="admin-description">
-                  Invitations are valid for 24 hours and can be
-                  redeemed once by the named account.
+                  Invite a registered account to become an administrator.
+                  The invitation expires after 24 hours
+                  and can be redeemed once.
                 </p>
-
+          
+                <!-- Website address -->
                 <div class="admin-field">
+          
                   <label for="websiteAddress">
                     Website address the recipient can open
                   </label>
+          
                   <input id="websiteAddress" type="url" placeholder="https://example.com">
+          
                 </div>
-
+          
+                <!-- Find account -->
                 <div class="admin-inline-form">
+          
                   <div class="admin-field">
+          
                     <label for="invitationUsername">
                       Registered username
                     </label>
+          
                     <input id="invitationUsername" type="text" placeholder="Enter username">
+          
                   </div>
-
+          
                   <button id="findAccount" type="button" class="admin-secondary-button">
                     Find account
                   </button>
+          
                 </div>
-
-                <div class="admin-field admin-field-medium">
+          
+                <!-- Select account -->
+                <div class="admin-field admin-invitation-select">
+          
                   <label for="invitationAccount">
                     Select an account for invitation
                   </label>
+          
                   <select id="invitationAccount">
                     <option value="">Select account</option>
                     <option value="wsxzikai">wsxzikai</option>
                   </select>
+          
                 </div>
-
+          
                 <div class="admin-actions">
-                  <button id="createInvitation" type="button" class="admin-primary-button">
+          
+                  <button id="createInvitation" type="button" class="admin-primary-button" disabled>
                     Create invitation
                   </button>
+          
                 </div>
-              </div>
-
-              <div class="admin-divider"></div>
-
-              <div class="admin-group">
+          
+                <div class="admin-divider"></div>
+          
+                <!-- Generated invitation link -->
                 <h3>Invitation link</h3>
-
-                <div class="admin-inline-form">
-                  <div class="admin-field">
-                    <label for="invitationLink">Generated link</label>
-                    <input id="invitationLink" type="text" readonly placeholder="No invitation link generated">
-                  </div>
-
-                  <button id="copyInvitationLink" type="button" class="admin-secondary-button">
+          
+                <div class="admin-field">
+          
+                  <label for="invitationLink">
+                    Generated link
+                  </label>
+          
+                  <input id="invitationLink" type="text" readonly placeholder="No invitation link generated">
+          
+                </div>
+          
+                <div class="admin-actions">
+          
+                  <button id="copyInvitationLink" type="button" class="admin-secondary-button" disabled>
                     Copy invitation link
                   </button>
+          
                 </div>
+          
               </div>
-
-              <div class="admin-divider"></div>
-
-              <div class="admin-group">
-                <h3>Invitation history</h3>
-
-                <div class="admin-table-scroll">
-                  <table class="admin-table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Account</th>
-                        <th scope="col">Created</th>
-                        <th scope="col">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>newadmin</td>
-                        <td>Oct 14, 2026</td>
-                        <td>
-                          <span class="admin-badge badge-pending">
-                            Pending
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>member01</td>
-                        <td>Oct 12, 2026</td>
-                        <td>
-                          <span class="admin-badge badge-accepted">
-                            Accepted
-                          </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+          
             </div>
-          </section>
+          
+          </dialog>
+
 
           <!-- ===============================
                SYSTEM LOGS
