@@ -11,10 +11,10 @@
 /** @type {Array<CarouselItem>} */
 // thumbnail 和 href 在下面的 for 迴圈 做賦值處理
 let carouselList = [
-  { serial: '01', title: 'Migration', desc: '#Seamless move to the cloud#', thumbnail: 'img/migration.svg', href: 'img/migration.svg' },
-  { serial: '02', title: 'Continuity', desc: '#Always-on, zero downtime#', thumbnail: 'img/continuity.svg', href: 'img/continuity.svg' },
-  { serial: '03', title: 'Integrity', desc: '#Trusted, consistent data#', thumbnail: 'img/integrity.svg', href: 'img/integrity.svg' },
-  { serial: '04', title: 'Security', desc: '#Protected end to end#', thumbnail: 'img/security.svg', href: 'img/security.svg' },
+  { serial: '01', title: 'Migration', desc: '#Seamless move to the cloud#', thumbnail: '../img/migration.svg', href: '../img/migration.svg' },
+  { serial: '02', title: 'Continuity', desc: '#Always-on, zero downtime#', thumbnail: '../img/continuity.svg', href: '../img/continuity.svg' },
+  { serial: '03', title: 'Integrity', desc: '#Trusted, consistent data#', thumbnail: '../img/integrity.svg', href: '../img/integrity.svg' },
+  { serial: '04', title: 'Security', desc: '#Protected end to end#', thumbnail: '../img/security.svg', href: '../img/security.svg' },
 ]
 // 初始化輪播圖基礎佈局
 carouselList.forEach((item, index) => {
@@ -130,10 +130,10 @@ function carouselItemSwitching(index, direction) {
   // 激活當前選中的輪播指示標
   layerFront.querySelector(`.media-nav-item:nth-child(${index + 1})`).setAttribute('active', 'true')
 
-  imageZoom(0.25, direction, carouselList[index].thumbnail, carouselList[index].href).then(() => {})
-  slideInText(mediaSerial, direction, 0.2, 0.4, carouselList[index].serial).then(() => {})
-  slideInText(mediaTitle, direction, 0.2, 0.5, carouselList[index].title).then(() => {})
-  slideInText(mediaDetail, direction, 0.2, 0.6, carouselList[index].desc).then(() => {})
+  imageZoom(0.25, direction, carouselList[index].thumbnail, carouselList[index].href).then(() => { })
+  slideInText(mediaSerial, direction, 0.2, 0.4, carouselList[index].serial).then(() => { })
+  slideInText(mediaTitle, direction, 0.2, 0.5, carouselList[index].title).then(() => { })
+  slideInText(mediaDetail, direction, 0.2, 0.6, carouselList[index].desc).then(() => { })
   setSlidePosition(index)
 }
 
