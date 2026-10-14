@@ -1315,3 +1315,76 @@
         transition: none;
     }
 }
+
+/* ==========================================
+   FILE MANAGER - MATCH ACTIVITY PANEL
+   ========================================== */
+
+/* Same main layout as Activity */
+.file-manager-page .explorer-main {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 0;
+    padding: 12px 0;
+
+    overflow: hidden;
+}
+
+/* Same panel dimensions as Activity */
+.file-manager-page .explorer {
+    width: 100%;
+    max-width: 1180px;
+
+    flex: 1;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 22px 26px;
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+/* File list scrolls inside the panel */
+.file-manager-page .file-table-wrap {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+
+    overflow: auto;
+    scrollbar-width: thin;
+}
+
+/* Keep toolbar and controls fixed */
+.file-manager-page .explorer-toolbar,
+.file-manager-page .explorer-controls,
+.file-manager-page .explorer-meta,
+.file-manager-page .explorer-bottom {
+    flex-shrink: 0;
+}
+
+/* Same mobile dimensions as Activity */
+@media (max-width: 900px) {
+    .file-manager-page .explorer {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .file-manager-page .explorer-main {
+        padding: 10px 0;
+    }
+
+    .file-manager-page .explorer {
+        padding: 16px 12px;
+    }
+}
