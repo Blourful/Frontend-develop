@@ -11,10 +11,10 @@
 /** @type {Array<CarouselItem>} */
 // thumbnail 和 href 在下面的 for 迴圈 做賦值處理
 let carouselList = [
-  { serial: '01', title: 'Migration', desc: '#Seamless move to the cloud#', thumbnail: '/img/migration.svg', href: '/img/migration.svg' },
-  { serial: '02', title: 'Continuity', desc: '#Always-on, zero downtime#', thumbnail: '/img/continuity.svg', href: '/img/continuity.svg' },
-  { serial: '03', title: 'Integrity', desc: '#Trusted, consistent data#', thumbnail: '/img/integrity.svg', href: '/img/integrity.svg' },
-  { serial: '04', title: 'Security', desc: '#Protected end to end#', thumbnail: '/img/security.svg', href: '/img/security.svg' },
+  { serial: '01', title: 'Migration', desc: '#Seamless move to the cloud#', thumbnail: 'img/migration.svg', href: 'img/migration.svg' },
+  { serial: '02', title: 'Continuity', desc: '#Always-on, zero downtime#', thumbnail: 'img/continuity.svg', href: 'img/continuity.svg' },
+  { serial: '03', title: 'Integrity', desc: '#Trusted, consistent data#', thumbnail: 'img/integrity.svg', href: 'img/integrity.svg' },
+  { serial: '04', title: 'Security', desc: '#Protected end to end#', thumbnail: 'img/security.svg', href: 'img/security.svg' },
 ]
 // 初始化輪播圖基礎佈局
 carouselList.forEach((item, index) => {
