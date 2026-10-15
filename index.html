@@ -1,4 +1,91 @@
-<html>
-    <a href="pages/login.html">Login</a>
-     <a href="pages/admin.html">Login</a>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Develop - 页面导航</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            min-height: 100vh;
+            font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 60px 20px;
+        }
+        header { text-align: center; color: #fff; margin-bottom: 48px; }
+        header h1 { font-size: 2.4rem; margin-bottom: 10px; }
+        header p { opacity: .85; }
+        .grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 22px;
+            background: rgba(255, 255, 255, .95);
+            border-radius: 16px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .15);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .card:hover { transform: translateY(-6px); box-shadow: 0 14px 32px rgba(0, 0, 0, .25); }
+        .icon {
+            flex: none;
+            width: 52px; height: 52px;
+            display: grid; place-items: center;
+            font-size: 26px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        .card h2 { font-size: 1.1rem; margin-bottom: 4px; }
+        .card p { font-size: .85rem; color: #777; }
+        footer { text-align: center; margin-top: 48px; color: rgba(255,255,255,.7); font-size: .85rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🚀 页面导航</h1>
+        <p>选择下方入口进入对应页面</p>
+    </header>
+
+    <main class="grid">
+        <a class="card" href="pages/home.html">
+            <div class="icon">🏠</div>
+            <div><h2>首页 Home</h2><p>系统主页</p></div>
+        </a>
+        <a class="card" href="pages/login.html">
+            <div class="icon">🔑</div>
+            <div><h2>登录 Login</h2><p>用户登录入口</p></div>
+        </a>
+        <a class="card" href="pages/signup.html">
+            <div class="icon">📝</div>
+            <div><h2>注册 Sign up</h2><p>创建新账号</p></div>
+        </a>
+        <a class="card" href="pages/reset-password.html">
+            <div class="icon">🔒</div>
+            <div><h2>重置密码</h2><p>找回或修改密码</p></div>
+        </a>
+        <a class="card" href="pages/activity.html">
+            <div class="icon">📊</div>
+            <div><h2>活动 Activity</h2><p>查看动态与活动</p></div>
+        </a>
+        <a class="card" href="pages/file-manager.html">
+            <div class="icon">📁</div>
+            <div><h2>文件管理</h2><p>管理上传的文件</p></div>
+        </a>
+        <a class="card" href="pages/admin.html">
+            <div class="icon">🛠️</div>
+            <div><h2>管理后台 Admin</h2><p>管理员入口</p></div>
+        </a>
+    </main>
+
+    <footer>© Frontend-develop</footer>
+</body>
 </html>
